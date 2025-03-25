@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
+   <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+    <!-- Menu web -->
+    <div class="animation">
+        <div class="running-text"> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+            <span><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        
+        </div>
+    </div>
+    <nav>
+        <div class="logo">
+            CAKE VU
+        </div>
+        <button class="menu-toggle">&#9776;</button> <!-- Nút mở menu -->
+        <div class="menu-container">
+            <div class="menu">
+                <ul>
+                    <li> <a href="index.html">TRANG CHỦ</a></li>
+                    <li></i> <a href="allproducts.html">SẢN PHẨM</a>
+                        <ul>
+                            <li><a href="#banhkem">BÁNH KEM LẠNH</a></li>
+                            <li><a href="#sinhnhat">BÁNH SINH NHẬT</a></li>       
+                        </ul>
+                    </li>
+                    <li></i> <a href="gioithieu.html">GIỚI THIỆU</a></li>
+                    <li></i> <a href="lienhe.html">LIÊN HỆ - ĐỊA CHỈ</a></li>
+                    <li></i> <a href="dangnhap.html">ĐĂNG NHẬP</a></li>
+                    <li></i> <a href="dangki.html">ĐĂNG KÍ</a></li>
+                    <li></i> <a href="cart.html">GIỎ HÀNG</a></li>
+                    
+                        <li id="adminPanel" style="display: none;"><span id="userName"></span>
+                        <ul  >
+                            <a href="admin/dashboard.html">Quản lí</a>
+                        </ul>
+                    </li>
+                       <span id="userName1" ></span>
+                   <button id="logoutBtn" >Đăng xuất</button>
+                   
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+  
+    <!-- //Menu web -->
+    <div class="fullanh">
+        <img src="img/banh.jpg" alt="">
+    </div>
+    <div class="animation1">
+        <div class="running-text"> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> KHÁM PHÁ BÁNH SINH NHẬT</span> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> KHÁM PHÁ BÁNH SINH NHẬT</span> 
+            <span><i class="fa-solid fa-cake-candles"></i> Thử thách bánh nướng mới của bakes</span> 
+        
+        </div>
+
+    </div>
+    <!-- assurance -->
+    <div class="assurance">
+        <div class="asbox1">
+            <div class="circle"><img src="img/pastry chef-cuate.png" alt="" srcset=""></div>
+            <h3>Chất lượng đảm bảo</h3>
+            <p>Bánh tươi ngon, làm từ nguyên liệu tự nhiên, an toàn sức khỏe.</p>
+        </div>
+        <div class="asbox2">
+            <div class="circle"><img src="img/Take Away-cuate.png" alt="" srcset=""></div>
+            <h3>Miễn phí giao hàng</h3>
+            <p>Giao bánh nhanh chóng trong vòng 1-2 giờ.</p>
+        </div>
+        <div class="asbox3">
+            <div class="circle"><img src="img/Heavy box-amico.png" alt="" srcset=""></div>
+            <h3>Đổi trả trong 30 ngày</h3>
+            <p>Đổi bánh dễ dàng nếu không đạt chất lượng.</p>
+        </div>
+    </div>
+    
+    
+    <!-- container -->
+    <div class="container">
+    <header>
+        <!-- chữ vào giữa -->
+        <div class="center">
+            <p>SẢN PHẨM HOT</p>
+           
+        </div>
+        <!-- / chữ vào giữa -->
+        <div id="loadsp" class="row">  
+            <!-- <div class="col1">
+                <a href="sanpham.html"><img src="img/img1.jpg" alt="Sản phẩm 1"></a>              
+                <h3 class="chu">Sản phẩm 1</h3>
+                <p class="price">500,000 VND</p>
+                <div class="buy"><a href="sanpham.html">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img2.jpg" alt="Sản phẩm 2">
+                <h3 class="chu">Sản phẩm 2</h3>
+                <p class="price">700,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img3.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img4.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img5.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img6.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div> -->
+   
+            <!-- Thêm sản phẩm khác nếu cần -->
+        </div>
+        
+        <!-- chữ vào giữa -->
+        <div id="banhkem" class="center">
+            <p>BÁNH KEM LẠNH</p>
+        </div>
+        <!-- / chữ vào giữa -->
+        <div id="loadsp1" class="row">
+            <!-- <div class="col1">
+                <img src="img/img1.jpg" alt="Sản phẩm 1">
+                <h3 class="chu">Sản phẩm 1</h3>
+                <p class="price">500,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img2.jpg" alt="Sản phẩm 2">
+                <h3 class="chu">Sản phẩm 2</h3>
+                <p class="price">700,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img3.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img4.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img5.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img6.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div> -->
+            <!-- Thêm sản phẩm khác nếu cần -->
+        </div>
+        <div id="sinhnhat" class="center">
+            <p>BÁNH SINH NHẬT</p>
+        </div>
+        <div id="loadsp2" class="row">
+            <!-- <div class="col1">
+                <img src="img/img1.jpg" alt="Sản phẩm 1">
+                <h3 class="chu">Sản phẩm 1</h3>
+                <p class="price">500,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img2.jpg" alt="Sản phẩm 2">
+                <h3 class="chu">Sản phẩm 2</h3>
+                <p class="price">700,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img3.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img4.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img5.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div>
+            <div class="col1">
+                <img src="img/img6.jpg" alt="Sản phẩm 3">
+                <h3 class="chu">Sản phẩm 3</h3>
+                <p class="price">600,000 VND</p>
+                <div class="buy"><a href="#">Mua ngay</a></div>
+                <div class="giohang"><a href="#">Thêm vào giỏ</a></div>
+            </div> -->
+            <!-- Thêm sản phẩm khác nếu cần -->
+        </div>
+        
+         
+        <!-- /container -->
+    </header>
+    </div>
+        <!-- chữ vào giữa -->
+        <div class="center">
+            <p class="chuto">Sáng lập vào 2015</p>
+            <p>Một tiệm bánh ngọt Pháp. Bakes tin rằng bánh ngọt nên giống như tình yêu: thú vị, chu đáo và trung thực. </p>
+            <p>Còn lại chỉ là bao bì.</p>
+        </div>
+        <!-- / chữ vào giữa -->
+        <!-- ảnh top người ăn -->
+        <div class="anhtop">
+            <img src="img/img-top.png" alt="">
+        </div>
+        <!-- / ảnh top người ăn -->
+             <!-- chữ vào giữa -->
+        <div class="center">
+            <p class="chuto">Bánh cho ngày bình thường, ngày đặc biệt và ngày đặc biệt rảnh rỗi.</p>
+            <p>Những Bài Viết Về Tiệm Bánh Của Chúng Tôi</p>
+        </div>
+    <!-- Bài viết -->
+    <div class="content-boxes">
+        <div class="box">
+            <img src="img/img6.jpg" alt="Ảnh 1">
+            <h3>Bí Quyết Làm Nên Những Chiếc Bánh Hoàn Hảo</h3>
+            <p>Những chiếc bánh tại cửa hàng của chúng tôi được tạo ra từ các nguyên liệu tinh tuyển nhất...
+
+            </p>
+            <a href="#" class="btn">Xem thêm</a>
+        </div>
+        <div class="box">
+            <img src="img/img7.jpg" alt="Ảnh 2">
+            <h3>Bánh – Nhịp Cầu Kết Nối Tình Yêu Thương</h3>
+            <p>Bạn đã từng nhận được một chiếc bánh từ người thân yêu?...</p>
+            <a href="#" class="btn">Xem thêm</a>
+        </div>
+        <div class="box">
+            <img src="img/img8.jpg" alt="Ảnh 3">
+            <h3>Hành Trình Khám Phá Những Hương Vị Bánh Độc Đáo</h3>
+            <p>Bánh không chỉ là món ăn, mà còn là câu chuyện về sự sáng tạo...</p>
+            <a href="#" class="btn">Xem thêm</a>
+        </div>
+        <div class="box">
+            <img src="img/img9.jpg" alt="Ảnh 4">
+            <h3>Tạo Nên Chiếc Bánh Của Riêng Bạn</h3>
+            <p>Bạn muốn một chiếc bánh độc đáo cho ngày kỷ niệm?...</p>
+            <a href="#" class="btn">Xem thêm</a>
+        </div>
+    </div>
+    
+</body>
+<footer>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>CAKE VU</h2>
+                <p>CAKE VU mang đến những chiếc bánh ngon miệng và đẹp mắt nhất. Chúng tôi luôn cam kết chất lượng và sự hài lòng của khách hàng.</p>
+                <div class="contact">
+                    <p><i class="fas fa-phone"></i> +84 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> contact@vucake.com</p>
+                </div>
+            </div>
+    
+            <div class="footer-section links">
+                <h2>Liên Kết Nhanh</h2>
+                <ul>
+                    <li><a href="#">Trang Chủ</a></li>
+                    <li><a href="#">Giới Thiệu</a></li>
+                    <li><a href="#">Sản Phẩm</a></li>
+                    <li><a href="#">Liên Hệ</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section social">
+                <h2>Theo Dõi Chúng Tôi</h2>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Vũ Cake. Mọi quyền được bảo lưu.</p>
+        </div>
+    </div>
+    
+    <!-- Add Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+</footer>
+<script src="https://uhchat.net/code.php?f=0d486e"></script>
+<script src="javascript/button.js"></script>
+<script src="dist/index.js"></script>
+<script src="dist/countcart.js"></script>
+</html>
+

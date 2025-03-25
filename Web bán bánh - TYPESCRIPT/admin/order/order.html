@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Dashboard - Admin</h1>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3 style="text-align: center; color: #ffc107;">Quản lý</h3>
+        <a href="../dashboard.html" >Dashboard</a>
+        <a href="../product/product.html" >Quản lý sản phẩm</a>
+        <a href="../category/category.html">Quản lý danh mục</a>
+        <a href="../user/user.html" >Quản lý người dùng</a>
+        <a href="../order/order.html" id="background">Quản lí đơn hàng</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Quản lý Đơn hàng</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Khách hàng</th>
+                    <th>Điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="orderTable"></tbody>
+        </table>
+    
+    </div>
+</body>
+</html>
+<script src="../../dist/orderAdmin.js" ></script>
+    

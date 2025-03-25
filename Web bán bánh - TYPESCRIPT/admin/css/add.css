@@ -1,0 +1,162 @@
+/* General body style */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form container style */
+form {
+    width: 400px;
+    padding: 20px 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+/* Căn chỉnh các thành phần trong form */
+.modal-container {
+    max-height: 90vh; /* Giới hạn chiều cao tối đa 90% màn hình */
+    overflow-y: auto; /* Cho phép cuộn dọc khi nội dung quá dài */
+    position: fixed; /* Giữ cố định trên màn hình */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Căn giữa modal */
+}
+/* Căn chỉnh các thành phần trong form */
+.modal-container label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+.modal-container input[type="text"],
+.modal-container select,
+.modal-container input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Nút button */
+.modal-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-container button:hover {
+    background-color: #e55b51;
+}
+
+/* Nút đóng form */
+.modal-container .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+}
+
+.modal-container .close:hover {
+    color: #ff6f61;
+}
+
+/* Close button */
+.close {
+    font-size: 20px;
+    color: #555;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: #ff6f61;
+}
+
+/* Header */
+h4 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* Input fields and select */
+input[type="text"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Button style */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff6f61;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #e55b51;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 15px 20px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 13px;
+    }
+}

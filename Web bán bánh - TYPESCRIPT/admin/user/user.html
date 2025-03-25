@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Dashboard - Admin</h1>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3 style="text-align: center; color: #ffc107;">Quản lý</h3>
+        <a href="../dashboard.html" >Dashboard</a>
+        <a href="../product/product.html" >Quản lý sản phẩm</a>
+        <a href="../category/category.html">Quản lý danh mục</a>
+        <a href="../user/user.html" id="background">Quản lý người dùng</a>
+        <a href="../order/order.html" >Quản lý đơn hàng</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Quản lý Người Dùng</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Email</th>
+                    <th>Vai trò</th>
+                    <th>Khóa</th>
+                </tr>
+            </thead>
+            <tbody id="showUsers">
+                <!-- Dữ liệu sẽ load từ JavaScript -->
+            </tbody>
+        </table>
+    
+    </div>
+</body>
+</html>
+<script src="../../dist/showUserAdmin.js"></script>

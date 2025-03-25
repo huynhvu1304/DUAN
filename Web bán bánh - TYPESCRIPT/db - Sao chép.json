@@ -1,0 +1,115 @@
+[
+
+      {
+        "id": 1,
+        "name": "Bánh Kem Hạt Phỉ",
+        "price": 575000,
+        "idcate": 1,
+        "img": "img1.jpg",
+        "hot": 1,
+        "description": "Kem bavaroise hạt phỉ, bánh, bánh sô-cô-la, praliné hạt phỉ, sốt caramel chảy."
+      },
+      {
+        "id": 2,
+        "name": "Bánh Kem 6 Lớp Chuối",
+        "price": 550000,
+        "idcate": 1,
+        "img": "img2.jpg",
+        "hot": 0,
+        "description": "Mứt chuối, mousse dừa, praliné hạt điều, bánh génoise, kem tươi chuối."
+      },
+      {
+        "id": 3,
+        "name": "Bánh Kem Trà Xanh Dâu Latte",
+        "price": 585000,
+        "idcate": 1,
+        "img": "img3.jpg",
+        "hot": 0,
+        "description": "Kem matcha, ganache matcha, kem ganache matcha, mousse dâu, bánh lady fingers thấm latte Trà Xanh."
+      },
+      {
+        "id": 4,
+        "name": "Bánh Tiramisu Trà Xanh ",
+        "price": 510000,
+        "idcate": 1,
+        "img": "img4.jpg",
+        "hot": 0,
+        "description": "Mô tả sản phẩm 4"
+      },
+      {
+        "id": 5,
+        "name": "Bánh Kem Trà Bá Tước, quả Lý Chua Đen",
+        "price": 565000,
+        "idcate": 1,
+        "img": "img5.jpg",
+        "hot": 0,
+        "description": "Mô tả sản phẩm 8"
+      },
+      {
+        "id": 6,
+        "name": "Bánh Kem Dâu và Vani",
+        "price": 595000,
+        "idcate": 1,
+        "img": "img6.jpg",
+        "hot": 1,
+        "description": "Mô tả sản phẩm 8"
+      },
+      {
+        "id": 8,
+        "name": "Su Kem Hạt Phỉ",
+        "price": 105000,
+        "idcate": 2,
+        "img": "img8.jpg",
+        "hot": 0,
+        "description": "Mô tả sản phẩm 8"
+      },
+      {
+        "id": 9,
+        "name": "Bánh Kem Chuối và Dừa",
+        "price": 95000,
+        "idcate": 2,
+        "img": "img9.jpg",
+        "hot": 1,
+        "description": "Mô tả sản phẩm 5"
+      },
+      {
+        "id": 10,
+        "name": "Bánh Ốp La Cheesecake",
+        "price": 85000,
+        "idcate": 2,
+        "img": "img10.jpg",
+        "hot": 1,
+        "description": "Mô tả sản phẩm 6"
+      },
+      {
+        "id": 11,
+        "name": "Bánh Tiramisu Lava",
+        "price": 110000,
+        "idcate": 2,
+        "img": "img11.jpg",
+        "hot": 1,
+        "description": "Mô tả sản phẩm 7"
+      },
+      {
+        "id": 12,
+        "name": "Bánh Kisses Trà Bá Tước và Việt Quất",
+        "price": 115000,
+        "idcate": 2,
+        "img": "img12.jpg",
+        "hot": 0,
+        "description": "Mô tả sản phẩm 8"
+      },
+      {
+        "id": 13,
+        "name": "Bánh Kem Dâu và Vani",
+        "price": 105000,
+        "idcate": 2,
+        "img": "img9.jpg",
+        "hot": 1,
+        "description": "Mô tả sản phẩm 8"
+      }
+
+      
+    
+    ]
+  

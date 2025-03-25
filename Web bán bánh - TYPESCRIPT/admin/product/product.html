@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Dashboard - Admin</h1>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3 style="text-align: center; color: #ffc107;">Quản lý</h3>
+        <a href="../dashboard.html" >Dashboard</a>
+        <a href="../product/product.html" id="background">Quản lý sản phẩm</a>
+        <a href="../category/category.html">Quản lý danh mục</a>
+        <a href="../user/user.html" >Quản lý người dùng</a>
+        <a href="../order/order.html" >Quản lý đơn hàng</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Quản lý Sản phẩm</h2>
+        <div class="addAndSearch">
+            <a href="../product/addpro.html"><button>Thêm sản phẩm</button></a>
+            <input type="text" id="search" placeholder="Tìm kiếm sản phẩm...">
+        </div>
+        <br><br>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Danh mục</th>
+                    <th>Hình ảnh</th>
+                    <th>Sản phẩm hot</th>
+                    <th>Mô tả</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody id="showPro">
+                
+            </tbody>
+        </table>
+    
+    </div>
+</body>
+</html>
+<script src="../../dist/showProAdmin.js"></script>
+<script></script>

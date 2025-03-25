@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vũ Cake - Tiệm Bánh Ngon Nhất</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
+   <link rel="stylesheet" href="css/footer.css">
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .header {
+            background-color: #ffcc00;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #fff;
+        }
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #ff6600;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 10px;
+        }
+        .section p {
+            line-height: 1.6;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .gallery img {
+            width: calc(33.333% - 20px);
+            height: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu web -->
+    <div class="animation">
+        <div class="running-text"> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+            <span><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        
+        </div>
+    </div>
+    <nav>
+        <div class="logo">
+            CAKE VU
+        </div>
+        <button class="menu-toggle">&#9776;</button> <!-- Nút mở menu -->
+        <div class="menu-container">
+            <div class="menu">
+                <ul>
+                    <li> <a href="index.html">TRANG CHỦ</a></li>
+                    <li></i> <a href="index.html">SẢN PHẨM</a>
+                        <ul>
+                            <li><a href="index.html#banhkem">BÁNH KEM LẠNH</a></li>
+                            <li><a href="index.html#sinhnhat">BÁNH SINH NHẬT</a></li>
+                        </ul>
+                    </li>
+                    <li></i> <a href="gioithieu.html">GIỚI THIỆU</a></li>
+                    <li></i> <a href="lienhe.html">LIÊN HỆ - ĐỊA CHỈ</a></li>
+                    <li></i> <a href="dangnhap.html">ĐĂNG NHẬP</a></li>
+                    <li></i> <a href="dangki.html">ĐĂNG KÍ</a></li>
+                    <li></i> <a href="cart.html">GIỎ HÀNG</a></li>
+                    <li id="adminPanel" style="display: none;"><span id="userName"></span>
+                        <ul  >
+                            <a href="admin/dashboard.html">Quản lí</a>
+                        </ul>
+                    </li>
+                       <span id="userName1" ></span>
+                   <button id="logoutBtn" style="display: none;color: #ff6f61;font-weight: bold;padding: 10px 15px;">Đăng xuất</button>
+                   
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+  
+    <!-- //Menu web -->
+
+    <div class="content">
+        <div class="section">
+            <h2>Giới Thiệu</h2>
+            <p>Chào mừng bạn đến với Vũ Cake! Chúng tôi tự hào là tiệm bánh mang đến cho bạn những chiếc bánh ngon nhất, chất lượng nhất. Với nguyên liệu tươi ngon và công thức đặc biệt, mỗi chiếc bánh của chúng tôi không chỉ ngon miệng mà còn đẹp mắt.</p>
+        </div>
+
+        <div class="section">
+            <h2>Những Loại Bánh Nổi Bật</h2>
+            <p>Chúng tôi có nhiều loại bánh phong phú, từ bánh sinh nhật, bánh cưới đến bánh ngọt hàng ngày. Một số loại bánh nổi bật của chúng tôi bao gồm:</p>
+            <ul>
+                <li>Bánh kem socola</li>
+                <li>Bánh mousse dâu tây</li>
+                <li>Bánh tiramisu</li>
+                <li>Bánh su kem</li>
+                <li>Bánh bông lan trứng muối</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Hình Ảnh</h2>
+            <div class="gallery">
+                <img src="img/img-sinhnhat-Dau.jpg" alt="Bánh kem socola">
+                <img src="img/img8.jpg" alt="Bánh mousse dâu tây">
+                <img src="img/img7.jpg" alt="Bánh tiramisu">
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h2>CAKE VU</h2>
+                    <p>CAKE VU mang đến những chiếc bánh ngon miệng và đẹp mắt nhất. Chúng tôi luôn cam kết chất lượng và sự hài lòng của khách hàng.</p>
+                    <div class="contact">
+                        <p><i class="fas fa-phone"></i> +84 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> contact@vucake.com</p>
+                    </div>
+                </div>
+        
+                <div class="footer-section links">
+                    <h2>Liên Kết Nhanh</h2>
+                    <ul>
+                        <li><a href="#">Trang Chủ</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Sản Phẩm</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer-section social">
+                    <h2>Theo Dõi Chúng Tôi</h2>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Vũ Cake. Mọi quyền được bảo lưu.</p>
+            </div>
+        </div>
+        
+        <!-- Add Font Awesome for icons -->
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        
+    </footer>
+</body>
+<script src="javascript/button.js"></script>
+<script src="dist/index.js"></script>
+</html>

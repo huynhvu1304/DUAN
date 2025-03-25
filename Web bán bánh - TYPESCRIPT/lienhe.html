@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ - Vũ Cake</title>
+    <link rel="stylesheet" href="css/lienhe.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
+   <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+ <!-- Menu web -->
+ <div class="animation">
+    <div class="running-text"> 
+        <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        <span><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+    
+    </div>
+</div>
+<nav>
+    <div class="logo">
+        CAKE VU
+    </div>
+    <button class="menu-toggle">&#9776;</button> <!-- Nút mở menu -->
+    <div class="menu-container">
+        <div class="menu">
+            <ul>
+                <li> <a href="index.html">TRANG CHỦ</a></li>
+                <li></i> <a href="index.html">SẢN PHẨM</a>
+                    <ul>
+                        <li><a href="index.html#banhkem">BÁNH KEM LẠNH</a></li>
+                        <li><a href="index.html#sinhnhat">BÁNH SINH NHẬT</a></li>
+                    </ul>
+                </li>
+                <li></i> <a href="gioithieu.html">GIỚI THIỆU</a></li>
+                <li></i> <a href="lienhe.html">LIÊN HỆ - ĐỊA CHỈ</a></li>
+                <li></i> <a href="dangnhap.html">ĐĂNG NHẬP</a></li>
+                <li></i> <a href="dangki.html">ĐĂNG KÍ</a></li>
+                <li></i> <a href="cart.html">GIỎ HÀNG</a></li>
+                <li id="adminPanel" style="display: none;"><span id="userName"></span>
+                    <ul  >
+                        <a href="admin/dashboard.html">Quản lí</a>
+                    </ul>
+                </li>
+                   <span id="userName1" ></span>
+               <button id="logoutBtn" style="display: none;color: #ff6f61;font-weight: bold;padding: 10px 15px;">Đăng xuất</button>
+               
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- //Menu web -->
+    <!-- Contact Form Section -->
+    <div class="contact-container">
+        <h1>Liên Hệ Với Chúng Tôi</h1>
+        <div class="contact-content">
+            <div class="contact-form">
+                <form action="submit_form.php" method="POST">
+                    <label for="name">Họ và tên:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Lời nhắn:</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+
+                    <button type="submit">Gửi</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <h2>Thông Tin Liên Hệ</h2>
+                <p><i class="fas fa-map-marker-alt"></i> Địa chỉ: 123 Đường ABC, Quận 12, TP. HCM</p>
+                <p><i class="fas fa-phone"></i> Điện thoại: +84 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> Email: contact@vucake.com</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h2>CAKE VU</h2>
+                    <p>CAKE VU mang đến những chiếc bánh ngon miệng và đẹp mắt nhất. Chúng tôi luôn cam kết chất lượng và sự hài lòng của khách hàng.</p>
+                    <div class="contact">
+                        <p><i class="fas fa-phone"></i> +84 123 456 789</p>
+                        <p><i class="fas fa-envelope"></i> contact@vucake.com</p>
+                    </div>
+                </div>
+        
+                <div class="footer-section links">
+                    <h2>Liên Kết Nhanh</h2>
+                    <ul>
+                        <li><a href="#">Trang Chủ</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Sản Phẩm</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                    </ul>
+                </div>
+        
+                <div class="footer-section social">
+                    <h2>Theo Dõi Chúng Tôi</h2>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 Vũ Cake. Mọi quyền được bảo lưu.</p>
+            </div>
+        </div>
+        
+        <!-- Add Font Awesome for icons -->
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        
+    </footer>
+</body>
+<script src="javascript/button.js"></script>
+<script src="dist/index.js"></script>
+</html>

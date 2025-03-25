@@ -1,0 +1,219 @@
+/* Cải thiện kiểu chữ, lề và padding cho tiêu đề */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f6f9;
+}
+
+.header {
+    background-color: #FF6F61;
+    color: #fff;
+    padding: 15px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #343a40;
+    height: 100vh;
+    position: fixed;
+    top: 60px; /* Bên dưới header */
+    left: 0;
+    color: #fff;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    padding: 15px;
+    text-decoration: none;
+    border-bottom: 1px solid #495057;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+.main-content {
+    margin-left: 250px;
+    margin-top: 80px; /* Khoảng cách dưới header */
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Để nút tìm kiếm nằm sang bên trái */
+#search {
+    padding: 10px;
+    margin: 10px 0;
+    width: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    float: left; /* Đưa nút tìm kiếm sang bên trái */
+}
+
+/* Đảm bảo bảng không bị ảnh hưởng */
+/* Bảng sản phẩm */
+table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #FF6F61;
+    color: #fff;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table td img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+/* Chỉnh sửa màu nền của các nút Sửa và Xóa */
+button {
+    padding: 8px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:first-child {
+    background-color: #4CAF50; /* Màu xanh cho nút Sửa */
+    color: white;
+}
+
+button:last-child {
+    background-color: #f44336; /* Màu đỏ cho nút Xóa */
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Cải thiện giao diện checkbox */
+input[type="checkbox"] {
+    margin: 0;
+    transform: scale(1.2);
+}
+
+/* Cải thiện giao diện của các ô tìm kiếm và bảng */
+table, th, td {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Cải thiện giao diện của ô tìm kiếm */
+#search::placeholder {
+    color: #aaa;
+}
+
+/* css giao diện thêm xóa */
+ /* Phần CSS */
+ .addAndSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.addAndSearch button {
+    background-color: #FF6F61;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+.addAndSearch button:hover {
+    background-color: #e55b4d;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+#background{
+    color: yellow;
+}
+
+/* .dashboard */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cột */
+    gap: 20px; /* Khoảng cách giữa các card */
+    padding: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
+.card-icon {
+    font-size: 40px;
+    color: #ff6f61;
+    margin-bottom: 10px;
+}
+
+.card-info h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.card-info p {
+    font-size: 1.5rem;
+    color: #555;
+    font-weight: bold;
+}

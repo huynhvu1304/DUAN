@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="../css/edit.css">
+
+<!-- Modal sửa sản phẩm -->
+<div class="modal-container">
+    <h4>Sửa sản phẩm</h4>
+    
+    <input type="hidden" id="editId" />
+
+    <label for="editName">Tên sản phẩm</label>
+    <input type="text" id="editName" />
+
+    <label for="editCategory">Danh mục</label>
+    <select id="editCategory"></select>
+
+    <label for="editImage">Hình ảnh chính</label>
+    <img id="oldImage" width="150"/>
+    <input type="file" id="editImage"/>
+    
+    <label for="editImage1">Ảnh 1</label>
+    <img id="oldImage1" width="150"/>
+    <input type="file" id="editImage1"/>
+    
+    <label for="editImage2">Ảnh 2</label>
+    <img id="oldImage2" width="150"/>
+    <input type="file" id="editImage2"/>
+    
+    <label for="editImage3">Ảnh 3</label>
+    <img id="oldImage3" width="150"/>
+    <input type="file" id="editImage3"/>
+    
+
+    <br/><br/>
+    <label for="editPrice">Giá</label>
+    <input type="text" id="editPrice" />
+
+    <label for="editHot">Nổi bật</label>
+    <input class="checkbox-cell" type="checkbox" id="editHot" />
+
+    <br/><br/>
+    <label for="editDescription">Mô tả</label>
+    <input type="text" id="editDescription" />
+
+    <button onclick="editProduct()">Sửa</button>
+    <a href="../dashboard.html">Trở lại</a>
+</div>

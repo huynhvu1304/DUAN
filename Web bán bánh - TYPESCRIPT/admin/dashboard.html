@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/admin.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>Dashboard - Admin</h1>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3 style="text-align: center; color: #ffc107;">Quản lý</h3>
+        <a href="dashboard.html" id="background">Dashboard</a>
+        <a href="product/product.html" >Quản lý sản phẩm</a>
+        <a href="category/category.html">Quản lý danh mục</a>
+        <a href="user/user.html" >Quản lý người dùng</a>
+        <a href="order/order.html" >Quản lý đơn hàng</a>
+    </div>
+
+   <!-- Main Content -->
+<div class="main-content">
+    <!-- dashboard -->
+    <div class="dashboard">
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-box"></i>
+            </div>
+            <div class="card-info">
+                <h3>Tổng Sản Phẩm</h3>
+                <p id="totalProducts">0</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-list"></i>
+            </div>
+            <div class="card-info">
+                <h3>Tổng Danh Mục</h3>
+                <p id="totalCategories">0</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+            <div class="card-info">
+                <h3>Tổng Doanh Thu</h3>
+                <p id="totalRevenue">0</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="card-info">
+                <h3>Tổng Users</h3>
+                <p id="totalUsers">0</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+<script src="../dist/orderAdmin.js"></script>
+<script src="../dist/TotalAdminManager.js"></script>

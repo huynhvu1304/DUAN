@@ -1,0 +1,357 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Bánh Kem Hạt Phỉ",
+      "price": 575000,
+      "idcate": 1,
+      "img": "img1.jpg",
+      "imgnho": [
+        "img1-1.jpg",
+        "img1-2.jpg",
+        "img1-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Kem bavaroise hạt phỉ, bánh, bánh sô-cô-la, praliné hạt phỉ, sốt caramel chảy."
+    },
+    {
+      "id": "2",
+      "name": "Bánh Kem 6 Lớp Chuối",
+      "price": 550000,
+      "idcate": 1,
+      "img": "img2.jpg",
+      "imgnho": [
+        "img2-1.jpg",
+        "img2-2.jpg",
+        "img2-1.jpg"
+      ],
+      "hot": 0,
+      "description": "Mứt chuối, mousse dừa, praliné hạt điều, bánh génoise, kem tươi chuối."
+    },
+    {
+      "id": "3",
+      "name": "Bánh Kem Trà Xanh Dâu Latte",
+      "price": 585000,
+      "idcate": 1,
+      "img": "img3.jpg",
+      "imgnho": [
+        "img3-1.jpg",
+        "img3-2.jpg",
+        "img3-3.jpg"
+      ],
+      "hot": 0,
+      "description": "Kem matcha, ganache matcha, kem ganache matcha, mousse dâu, bánh lady fingers thấm latte Trà Xanh."
+    },
+    {
+      "id": "4",
+      "name": "Bánh Tiramisu Trà Xanh ",
+      "price": 510000,
+      "idcate": 1,
+      "img": "img4.jpg",
+      "imgnho": [
+        "img4-1.jpg",
+        "img4-2.jpg",
+        "img4-3.jpg"
+      ],
+      "hot": 0,
+      "description": "Mô tả sản phẩm 4"
+    },
+    {
+      "id": "5",
+      "name": "Bánh Kem Trà Bá Tước, quả Lý Chua Đen",
+      "price": 565000,
+      "idcate": 1,
+      "img": "img5.jpg",
+      "imgnho": [
+        "img5-1.jpg",
+        "img5-2.jpg",
+        "img5-3.jpg"
+      ],
+      "hot": 0,
+      "description": "Mô tả sản phẩm 8"
+    },
+    {
+      "id": "6",
+      "name": "Bánh Kem Dâu và Vani",
+      "price": 595000,
+      "idcate": 1,
+      "img": "img6.jpg",
+      "imgnho": [
+        "img6-1.jpg",
+        "img6-2.jpg",
+        "img6-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mô tả sản phẩm 8"
+    },
+    {
+      "id": "7",
+      "name": "Su Kem Hạt Phỉ",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img7.jpg",
+      "imgnho": [
+        "img7-1.jpg",
+        "img7-2.jpg",
+        "img7-3.jpg"
+      ],
+      "hot": 0,
+      "description": "Mô tả sản phẩm 8"
+    },
+    {
+      "id": "8",
+      "name": "Bánh Kem Chuối và Dừa",
+      "price": 95000,
+      "idcate": 2,
+      "img": "img8.jpg",
+      "imgnho": [
+        "img8-1.jpg",
+        "img8-2.jpg",
+        "img8-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mô tả sản phẩm 5"
+    },
+    {
+      "id": "9",
+      "name": "Bánh Tiramisu Mâm Xôi",
+      "price": 85000,
+      "idcate": 2,
+      "img": "img9.jpg",
+      "imgnho": [
+        "img9-1.jpg",
+        "img9-2.jpg",
+        "img9-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mô tả sản phẩm 6"
+    },
+    {
+      "id": "10",
+      "name": "Bánh Ốp La Cheesecake",
+      "price": 110000,
+      "idcate": 2,
+      "img": "img10.jpg",
+      "imgnho": [
+        "img10-1.jpg",
+        "img10-2.jpg",
+        "img10-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mô tả sản phẩm 7"
+    },
+    {
+      "id": "11",
+      "name": "Bánh Tiramisu Lava",
+      "price": 115000,
+      "idcate": 2,
+      "img": "img11.jpg",
+      "imgnho": [
+        "img11-1.jpg",
+        "img11-2.jpg",
+        "img11-3.jpg"
+      ],
+      "hot": 0,
+      "description": "Mô tả sản phẩm 8"
+    },
+    {
+      "id": "12",
+      "name": "Bánh Kisses Trà Bá Tước và Việt Quất",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img12.jpg",
+      "imgnho": [
+        "img12-1.jpg",
+        "img12-2.jpg",
+        "img12-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mô tả sản phẩm 8"
+    },
+    {
+      "id": "13",
+      "name": "Bánh Kem Dâu và Vani",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img13.jpg",
+      "imgnho": [
+        "img13-1.jpg",
+        "img13-2.jpg",
+        "img13-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mô tả sản phẩm 8"
+    },
+    {
+      "id": "14",
+      "name": "Bánh Tart trứng",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img14.jpg",
+      "imgnho": [
+        "img14-1.jpg",
+        "img14-2.jpg",
+        "img14-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Bánh cheesecake không nướng với kem phô mai, sốt trứng muối, sốt chanh, bánh mirliton không gluten.Không hương liệu nhân tạoKhông chứa gluten"
+    },
+    {
+      "id": "15",
+      "name": "Bánh Kem Cafe Sua",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img15.jpg",
+      "imgnho": [
+        "img15-1.jpg",
+        "img15-2.jpg",
+        "img15-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Bánh cheesecake không nướng với kem phô mai, sốt trứng muối, sốt chanh, bánh mirliton không gluten.Không hương liệu nhân tạoKhông chứa gluten"
+    },
+    {
+      "id": "16",
+      "name": "Bánh Croissant",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img16.jpg",
+      "imgnho": [
+        "img16-1.jpg",
+        "img16-2.jpg",
+        "img16-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Bánh cheesecake không nướng với kem phô mai, sốt trứng muối, sốt chanh, bánh mirliton không gluten.Không hương liệu nhân tạoKhông chứa gluten"
+    },
+    {
+      "id": "17",
+      "name": "Bánh mì sữa kiểu pháp",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img17.jpg",
+      "imgnho": [
+        "img17-1.jpg",
+        "img17-2.jpg",
+        "img17-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Một chiếc bánh mì sữa mềm kiểu Pháp hoàn hảo cho bữa sáng với mứt, bơ và một tách cà phê."
+    },
+    {
+      "id": "18",
+      "name": "Bánh su kem hạt phỉ",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img18.jpg",
+      "imgnho": [
+        "img18-1.jpg",
+        "img18-2.jpg",
+        "img18-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Một chiếc bánh mì sữa mềm kiểu Pháp hoàn hảo cho bữa sáng với mứt, bơ và một tách cà phê."
+    },
+    {
+      "id": "19",
+      "name": "Bánh chuối",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img19.jpg",
+      "imgnho": [
+        "img19-1.jpg",
+        "img19-2.jpg",
+        "img19-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Một chiếc bánh mì sữa mềm kiểu Pháp hoàn hảo cho bữa sáng với mứt, bơ và một tách cà phê."
+    },
+    {
+      "id": "20",
+      "name": "Bánh Trà Xanh Namelaka Mousse",
+      "price": 105000,
+      "idcate": 2,
+      "img": "img20.jpg",
+      "imgnho": [
+        "img20-1.jpg",
+        "img20-2.jpg",
+        "img20-3.jpg"
+      ],
+      "hot": 1,
+      "description": "Mousse trà xanh, caramen mặn, mứt việt quất, trà xanh namelaka, bánh trà xanh madeline, sô-cô-la aero."
+    },
+    {
+      "id": "21",
+      "name": "Bánh Kem Dâu và Vani",
+      "idcate": 1,
+      "img": "img1.jpg",
+      "imgnho": [],
+      "price": 110000,
+      "hot": 0,
+      "description": "Thơm ngon, bánh mềm",
+      "quantity": 0
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "img": "img2.jpg",
+      "name": "Bánh sinh nhật"
+    },
+    {
+      "id": "2",
+      "img": "img20.jpg",
+      "name": "Bánh kem lạnh"
+    },
+    {
+      "id": "3",
+      "name": "bánh1",
+      "img": "img3-1.jpg"
+    }
+  ],
+  "users": [
+    {
+      "id": "fd7a",
+      "email": "admin@gmail.com",
+      "password": "123",
+      "role": "admin"
+    },
+    {
+      "id": "587b",
+      "email": "hvu1436@gmail.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "role": "user",
+      "locked": 1
+    },
+    {
+      "id": "0a53",
+      "email": "hvu1435@gmail.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "role": "user",
+      "locked": 0
+    },
+    {
+      "id": "5a76",
+      "email": "hvu1435gmail.com",
+      "password": "123",
+      "confirmPassword": "123",
+      "role": "user",
+      "locked": 0
+    }
+  ],
+  "orders": [],
+  "revenue": {
+    "item": {
+      "item": {
+        "item": {
+          "total": 10
+        },
+        "total": 0
+      },
+      "total": 95000
+    },
+    "total": 955000
+  }
+}
