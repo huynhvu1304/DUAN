@@ -1,0 +1,177 @@
+/* CSS/dangnhap.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.br {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.name span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF6F61;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #3D464D;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #FF6F61;
+    outline: none;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.log-sign {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.log-sign .save label {
+    font-size: 14px;
+    color: #3D464D;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    background-color: #FF6F61;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e65a50;
+}
+
+button:active {
+    background-color: #cc5046;
+}
+
+a {
+    text-decoration: none;
+    color: #FF6F61;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.but {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.gg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+.gg:hover {
+    background-color: #ddd;
+}
+
+.gg .img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-image: url('path/to/google-logo.png'); /* Thay đổi thành đường dẫn logo Google */
+    background-size: cover;
+    background-position: center;
+}
+
+.gg .text {
+    font-size: 14px;
+    color: #3D464D;
+}
+
+.gg .text b {
+    color: #FF6F61;
+}
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .br {
+        width: 90%; /* Đổi kích thước thành 90% để vừa với màn hình nhỏ */
+        margin: 20px auto;
+    }
+
+    .log-sign {
+        flex-direction: column; /* Đổi từ row sang column để các phần tử nằm dưới nhau */
+        align-items: flex-start;
+    }
+
+    .log-sign .save label,
+    .log-sign .save input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%; /* Đổi chiều rộng của button thành 100% để đầy rộng */
+        padding: 12px;
+        
+    }
+    .gg {
+        width: 100%; /* Cải thiện diện mạo của Google login button */
+        margin-top: 20px;
+    }
+
+    .gg .img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .gg .text {
+        font-size: 16px;
+    }
+
+}

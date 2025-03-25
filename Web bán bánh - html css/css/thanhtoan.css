@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+body {
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+.container {
+    max-width: 900px;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+}
+.form-container, .order-summary {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.form-container {
+    flex: 2;
+}
+.order-summary {
+    flex: 1;
+    border: 2px solid #FF6F61;
+}
+h2 {
+    color: #FF6F61;
+    margin-bottom: 15px;
+}
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 12px;
+}
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: none;
+}
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+}
+.payment-method {
+    margin: 15px 0;
+}
+.order-summary p {
+    margin-bottom: 12px; /* Tạo khoảng cách giữa các dòng */
+    font-size: 16px; 
+}
+
+.order-summary .total {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px solid #ddd; /* Gạch ngang trên tổng tiền */
+}
+
+.payment-method {
+    margin-top: 15px;
+}
+
+.payment-method label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 8px; /* Khoảng cách giữa các lựa chọn thanh toán */
+}
+
+.payment-method input {
+    width: 16px;
+    height: 16px;
+}
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    background: #FF6F61;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #e65a50;
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack the form and order summary vertically on small screens */
+    }
+
+    .form-container, .order-summary {
+        flex: 1;
+        margin-bottom: 20px; /* Add margin between stacked sections */
+    }
+}
+
+@media (max-width: 480px) {
+    .total {
+        font-size: 16px; /* Reduce font size for smaller screens */
+    }
+
+    .order-summary .total {
+        font-size: 18px; /* Reduce font size for smaller screens */
+    }
+
+    .btn {
+        font-size: 14px; /* Smaller button text on small screens */
+        padding: 10px; /* Smaller padding */
+    }
+}

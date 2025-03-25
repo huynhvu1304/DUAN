@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/thanhtoan.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/all.css">
+
+</head>
+     <!-- Menu web -->
+    <div class="animation">
+        <div class="running-text"> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+            <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+            <span><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        
+        </div>
+    </div>
+    <nav>
+        <div class="logo">
+            CAKE VU
+        </div>
+        <button class="menu-toggle">&#9776;</button> <!-- Nút mở menu -->
+        <div class="menu-container">
+            <div class="menu">
+                <ul>
+                    <li> <a href="index.html">TRANG CHỦ</a></li>
+                    <li></i> <a href="index.html">SẢN PHẨM</a>
+                        <ul>
+                            <li><a href="index.html#banhkem">BÁNH KEM LẠNH</a></li>
+                        <li><a href="index.html#sinhnhat">BÁNH SINH NHẬT</a></li>
+                        </ul>
+                    </li>
+                    <li></i> <a href="#">GIỚI THIỆU</a></li>
+                    <li></i> <a href="#">LIÊN HỆ - ĐỊA CHỈ</a></li>
+                    <li></i> <a href="dangnhap.html">ĐĂNG NHẬP</a></li>
+                    <li></i> <a href="dangki.html">ĐĂNG KÍ</a></li>
+                    <li></i> <a href="cart.html">Giỏ Hàng</a></li>
+                    <form class="search-form" (ngSubmit)="onSearch()">
+                        <input 
+                            class="search-input" 
+                            type="search" 
+                            placeholder="Nhập tên" 
+                            name="search" 
+                            [(ngModel)]="keyword"
+                        >
+                        <input class="search-button" type="submit" value="Tìm">
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    
+  
+    <!-- //Menu web -->
+    
+
+<body >
+    <div class="container">
+        <!-- Form nhập thông tin -->
+        <div class="form-container">
+            <h2>THÔNG TIN THANH TOÁN</h2>
+            <label>Họ và tên *</label>
+            <input type="text" placeholder="Nhập đầy đủ họ và tên của bạn">
+    
+            <label>Địa chỉ *</label>
+            <input type="text" placeholder="Ví dụ: Số xx, Phường xx, Quận xx, TP. HCM">
+    
+            <label>Số điện thoại *</label>
+            <input type="text" placeholder="Nhập số điện thoại">
+    
+            <label>Email (tùy chọn)</label>
+            <input type="email" placeholder="Nhập email">
+    
+            <label>Ghi chú đơn hàng (tùy chọn)</label>
+            <textarea rows="3" placeholder="Ghi chú về đơn hàng..."></textarea>
+        </div>
+    
+        <!-- Tóm tắt đơn hàng -->
+        <div class="order-summary">
+            <h2>ĐƠN HÀNG CỦA BẠN</h2>
+            <p><strong>Sản phẩm:</strong> Bánh 1</p>
+            <p><strong>Số lượng:</strong> 2</p>
+            <p><strong>Tạm tính:</strong> 2000 đ</p>
+            <div class="total">Tổng: 2000 đ</div>
+    
+            <div class="payment-method">
+                <label>
+                    <input type="radio" name="payment" checked> Trả tiền mặt khi nhận hàng 
+                </label>
+                <label>
+                    <input type="radio" name="payment"> Chuyển khoản ngân hàng
+                </label>
+            </div>
+    
+            <button class="btn">ĐẶT HÀNG</button>
+        </div>
+    </div>
+<footer>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h2>CAKE VU</h2>
+                <p>CAKE VU mang đến những chiếc bánh ngon miệng và đẹp mắt nhất. Chúng tôi luôn cam kết chất lượng và sự hài lòng của khách hàng.</p>
+                <div class="contact">
+                    <p><i class="fas fa-phone"></i> +84 123 456 789</p>
+                    <p><i class="fas fa-envelope"></i> contact@vucake.com</p>
+                </div>
+            </div>
+    
+            <div class="footer-section links">
+                <h2>Liên Kết Nhanh</h2>
+                <ul>
+                    <li><a href="#">Trang Chủ</a></li>
+                    <li><a href="#">Giới Thiệu</a></li>
+                    <li><a href="#">Sản Phẩm</a></li>
+                    <li><a href="#">Liên Hệ</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-section social">
+                <h2>Theo Dõi Chúng Tôi</h2>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Vũ Cake. Mọi quyền được bảo lưu.</p>
+        </div>
+    </div>
+    
+    <!-- Add Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+</footer>  
+    
+</body>
+<script src="main.js"></script>
+<script src="javascript/button.js"></script>
+</html>
+
+

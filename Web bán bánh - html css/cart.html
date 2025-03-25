@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/footer.css">
+   <link rel="stylesheet" href="CSS/cart.css">
+   <script src="javascript/button.js"></script>
+
+</head>
+<body>
+   <!-- Menu web -->
+   <div class="animation">
+    <div class="running-text"> 
+        <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        <span style="padding: 40px;"><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+        <span><i class="fa-solid fa-cake-candles"></i> Thử bánh nướng mới của bakes</span> 
+    
+    </div>
+</div>
+<nav>
+    <div class="logo">
+        CAKE VU
+    </div>
+    <button class="menu-toggle">&#9776;</button> <!-- Nút mở menu -->
+    <div class="menu-container">
+        <div class="menu">
+            <ul>
+                <li> <a href="index.html">TRANG CHỦ</a></li>
+                <li></i> <a href="index.html">SẢN PHẨM</a>
+                    <ul>
+                        <li><a href="index.html#banhkem">BÁNH KEM LẠNH</a></li>
+                        <li><a href="index.html#sinhnhat">BÁNH SINH NHẬT</a></li>
+                    </ul>
+                </li>
+                <li></i> <a href="#">GIỚI THIỆU</a></li>
+                <li></i> <a href="#">LIÊN HỆ - ĐỊA CHỈ</a></li>
+                <li></i> <a href="dangnhap.html">ĐĂNG NHẬP</a></li>
+                <li></i> <a href="dangki.html">ĐĂNG KÍ</a></li>
+                <li></i> <a href="cart.html">GIỎ HÀNG</a></li>
+                <form class="search-form" (ngSubmit)="onSearch()">
+                    <input 
+                        class="search-input" 
+                        type="search" 
+                        placeholder="Nhập tên" 
+                        name="search" 
+                        [(ngModel)]="keyword"
+                    >
+                    <input class="search-button" type="submit" value="Tìm">
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+
+<!-- //Menu web -->
+
+
+    
+<section class="loadvaogiohang">
+    <table class="banggiohang">
+        <thead class="kkk">
+            <tr>
+                <th><input type="checkbox" id="select_all"></th>
+                <th>Sản Phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Tổng</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody class="kkk" id="tb_cart">
+            <tr>
+                <td><input type="checkbox" class="select_product"></td>
+                <td>Bánh 1</td>
+                <td><img src="img/img1-1.jpg" alt="Product Image" width="50"></td>
+                <td class="price">1000</td>
+                <td><input type="number" class="quantity" min="1" value="1"></td>
+                <td class="total_price">1000</td>
+                <td><button class="delete">Xóa</button></td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" class="select_product"></td>
+                <td>Bánh 1</td>
+                <td><img src="img/img1-1.jpg" alt="Product Image" width="50"></td>
+                <td class="price">1000</td>
+                <td><input type="number" class="quantity" min="1" value="1"></td>
+                <td class="total_price">1000</td>
+                <td><button class="delete">Xóa</button></td>
+            </tr>
+        </tbody>
+        <tfoot class="kkk">
+            <tr>
+                <td colspan="4"><strong>Tổng Tất Cả Sản Phẩm</strong></td>
+                <td id="total_price">1000</td>
+                <td><a href="thanhtoan.html"><button>Thanh Toán</button></a></td>
+            </tr>
+        </tfoot>
+    </table>
+</section>
+</body>
+</html>
+<script src="javascript/cart.js"></script>
