@@ -1,0 +1,131 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Contact Form Section */
+.contact-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.contact-container h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.contact-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.contact-form,
+.contact-info {
+    flex: 1;
+    margin: 20px;
+    min-width: 300px;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    padding: 10px;
+    border: none;
+    background-color: #ff6e61dc;
+    color: black;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #ff6f61;
+    color: rgb(255, 255, 255);
+}
+
+.contact-info {
+    text-align: left;
+}
+
+.contact-info h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.contact-info p {
+    font-size: 1em;
+    margin: 5px 0;
+    color: #555;
+}
+
+.contact-info p i {
+    margin-right: 10px;
+    color: #ffcc00;
+}
+@media screen and (max-width: 600px) {
+    .contact-content {
+        flex-direction: column; /* Chuyển về dạng cột trên mobile */
+        align-items: center;
+    }
+
+    .contact-form,
+    .contact-info {
+        width: 100%; /* Cả hai phần tử đều chiếm toàn bộ chiều rộng */
+        text-align: center;
+    }
+
+    .contact-info p {
+        text-align: center;
+    }
+    .contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    transition: border 0.3s ease-in-out;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #ff6f61;
+    outline: none;
+}
+.contact-form button {
+    padding: 12px;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+}
+
+.contact-form button:hover {
+    transform: scale(1.05);
+}
+
+}

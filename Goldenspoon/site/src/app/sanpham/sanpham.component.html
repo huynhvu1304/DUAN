@@ -1,0 +1,64 @@
+<main class="products-page">
+    <!-- Bộ lọc -->
+    <aside class="filter-section">
+        <h2>Bộ lọc</h2>
+      
+        <div class="filter-group">
+          <label for="sort">Sắp xếp:</label>
+          <select id="sort" [(ngModel)]="sortOption">
+            <option value="newest">Mới nhất</option>
+            <option value="oldest">Cũ nhất</option>
+          </select>
+        </div>
+      
+        <div class="filter-group">
+          <label for="cook-time">Thời gian nấu:</label>
+          <select id="cook-time" [(ngModel)]="cookTimeFilter">
+            <option value="all">Tất cả</option>
+            <option value="short">Dưới 30 phút</option>
+            <option value="medium">30-60 phút</option>
+            <option value="long">Trên 60 phút</option>
+          </select>
+        </div>
+      
+        <div class="filter-group">
+          <label for="portion">Khẩu phần:</label>
+          <select id="portion" [(ngModel)]="khauPhanFilter">
+            <option value="all">Tất cả</option>
+            <option value="short">1 người</option>
+            <option value="medium">2-3 người</option>
+            <option value="long">4-6 người</option>
+          </select>
+        </div>
+      
+        <button class="apply-filter-btn" (click)="applyFilters()">Áp dụng</button>
+      </aside>
+      
+
+    <!-- Danh sách món ăn -->
+    <section class="recipes-section">
+        <h2>Danh sách món ăn</h2>
+        <div class="recipes-container">
+            <div *ngFor="let product of sortedProduct" class="recipe-card">
+              <a [routerLink]="['/chitiet', product._id]">
+                <img
+                  [src]="apiUrl + '/images/' + product.thong_tin_mon_an.img"
+                  [alt]="product.thong_tin_mon_an.ten_mon"
+                  class="recipe-image"
+                />
+              </a>
+              <div class="recipe-details">
+                <h3 class="recipe-name">{{ product.thong_tin_mon_an.ten_mon }}</h3>
+                <h6 class="recipe-time">{{ product.thong_tin_mon_an.mien_quoc_gia }}</h6>
+                <p class="recipe-time">Thời gian: {{ product.cach_lam.thoi_gian_lam }}</p>
+                <p class="recipe-time">Khẩu phần: {{ product.nguyen_lieu.khau_phan }}</p>
+                <button class="view-recipe-btn">
+                    <a [routerLink]="['/chitiet', product._id]">XEM CHI TIẾT &gt;</a>
+                  </button>
+              </div>
+            </div>
+            <!-- Thêm các món ăn khác -->
+        </div>
+        <app-listcard></app-listcard>
+    </section>
+</main>

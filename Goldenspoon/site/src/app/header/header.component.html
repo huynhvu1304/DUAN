@@ -1,0 +1,64 @@
+<!-- Thanh điều hướng trên cùng -->
+<div class="top-bar">
+    <div class="left">
+      <div class="icon-contact">
+        <span>Về chúng tôi</span> | <span>Hỏi Đầu Bếp</span> | <span>Theo dõi trên:</span>
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div class="right">
+      <span style="margin-right: 20px;"></span>
+<!-- Tài khoản -->
+<ng-template #notLoggedIn>
+  <a routerLink="/dangky" class="login-link">ĐĂNG NHẬP</a>
+  </ng-template>
+
+
+  <li *ngIf="isLoggedIn(); else notLoggedIn" class="account">
+    <a routerLink="/" class="account-link">Chào, {{ getUserName() }}</a>
+    <ul class="account-menu">
+      <li><a (click)="logout()">ĐĂNG XUẤT</a></li>
+    </ul>
+  </li>
+    </div>
+  </div>
+  
+
+  
+  <!-- Menu chính -->
+  <section class="menu-section">
+      <!-- Hamburger Icon -->
+  <div class="hamburger" (click)="toggleMenu()">
+    &#9776;
+  </div>
+  <div class="logo-item">
+    <a (click)="goToTop()" style="cursor: pointer;">
+    <img src="assets/img/LOGO.png" alt="Ajinomoto Logo" class="menu-logo-mobile">
+  </a>
+  </div>
+    <ul class="menu" [class.show]="isMenuOpen">
+      <div class="logo-item">
+        <a (click)="goToTop()" style="cursor: pointer;">
+        <img src="assets/img/LOGO.png" alt="Ajinomoto Logo" class="menu-logo">
+      </a>
+      </div>
+      <a routerLink="/" style="margin-left: 20px;" (click)="goToTop()" style="cursor: pointer;">Trang chủ</a>
+      <li class="dropdown" [class.open]="dropdownOpen[0]">
+        <a [routerLink]="['/sanpham']" (click)="toggleDropdown($event, 0)" style="color: black;">Công thức món ăn ▼</a>
+        <ul class="dropdown-menu">
+          <li>
+            <a [routerLink]="['/sanpham']" style="color: black; cursor: pointer;">Tất cả công thức </a>
+          </li>
+          <li *ngFor="let cat of categories">
+            <a (click)="selectCategory(cat._id)" style="color: black; cursor: pointer;">
+              {{ cat.name }}
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li><a routerLink="/gioithieu" style="color: black;">Giới thiệu</a></li>
+      <li><a routerLink="/yeuthich" style="color: black;">Yêu thích</a></li>
+    </ul>
+  </section>
+  

@@ -1,0 +1,532 @@
+
+/* Main Wrapper */
+.main-wrapper {
+    display: flex;
+    max-width: 1200px;
+    margin: 40px auto;
+    gap: 30px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+}
+
+.sidebar h3 {
+    font-size: 1.2rem;
+    color: #d84315;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.sidebar p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.favorite-btn {
+    background-color: #ff7043;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-btn:active {
+    background-color: #d84315;
+}
+
+.favorite-btn.favorited {
+    background-color: #d84315;
+}
+
+.favorite-icon {
+    font-size: 1.2rem;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero img {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    animation: slideIn 1s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dish-name {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ff7043;
+    margin: 25px 0;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Description */
+.description {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.description p {
+    margin-bottom: 10px;
+}
+
+/* Ingredients */
+.ingredients {
+    margin-bottom: 30px;
+}
+
+.ingredients h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.ingredients h3 {
+    font-size: 1.3rem;
+    color: #d84315;
+    margin: 15px 0 10px;
+}
+
+.ingredients ul {
+    padding-left: 25px;
+    list-style-type: disc;
+}
+
+.ingredients li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Preparation */
+.preparation {
+    margin-bottom: 30px;
+}
+
+.preparation h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.preparation ul {
+    padding-left: 25px;
+    list-style-type: disc;
+}
+
+.preparation li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Steps */
+.steps {
+    margin-bottom: 30px;
+}
+
+.steps h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.toggle-steps-btn {
+    background-color: #ff7043;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-steps-btn:active {
+    background-color: #d84315;
+}
+
+.steps-content {
+    height: auto;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.steps-content.hidden {
+    max-height: 0;
+}
+
+.step {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 5px solid #ff7043;
+    background: #fff3e0;
+    border-radius: 5px;
+}
+
+.step h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.step p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Nutrition */
+.nutrition {
+    margin-bottom: 30px;
+}
+
+.nutrition h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.nutrition table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.nutrition th, .nutrition td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.nutrition th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.nutrition td {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Tips */
+.tips {
+    margin-bottom: 30px;
+}
+
+.tips h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.tips ul {
+    padding-left: 25px;
+    list-style-type: disc;
+}
+
+.tips li {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Tags */
+.tags {
+    margin-bottom: 30px;
+}
+
+.tags h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.tag-list {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tag-list a {
+    background-color: #f0f0f0;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+/* Rating */
+.rating {
+    margin-bottom: 30px;
+}
+
+.rating h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.rating-stars {
+    font-size: 1.2rem;
+    color: #ff7043;
+    margin-bottom: 10px;
+}
+
+.rate-btn {
+    background-color: #ff7043;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Comments */
+.comment {
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.comment p {
+    margin: 0;
+    font-size: 1rem;
+}
+.comment strong {
+    color: #E50000;
+}
+.comment-time {
+    font-size: 0.9rem;
+    color: #666;
+}
+.comment strong {
+    color: #E50000;
+}
+
+.comments h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+.comments form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.comments textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.comments button {
+    background-color: #ff7043;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    align-self: flex-start;
+}
+/* Related Recipes */
+.related-recipes {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.related-recipes h2 {
+    font-size: 1.6rem;
+    color: #d84315;
+    margin-bottom: 15px;
+}
+
+/* Dùng flexbox thay vì grid */
+.recipe-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Recipe Card */
+.recipe-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 15px;
+    width: 200px; /* Cố định chiều rộng */
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+/* Hiệu ứng hover */
+.recipe-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ảnh */
+.recipe-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Tiêu đề */
+.recipe-card h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Thời gian */
+.recipe-card p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+
+
+
+
+/* Footer */
+footer {
+    background-color: #E50000;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+    }
+
+    .main-content {
+        padding: 20px;
+    }
+
+    .dish-name {
+        font-size: 2rem;
+    }
+
+    .recipe-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .dish-name {
+        font-size: 1.8rem;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .top-bar .right {
+        margin-top: 10px;
+    }
+}
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+    }
+
+    .dish-name {
+        font-size: 1.8rem;
+    }
+
+    .top-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .top-bar .right {
+        margin-top: 10px;
+    }
+    .logo-item {
+        display: none;
+}
+  }
+  /* hét menu */

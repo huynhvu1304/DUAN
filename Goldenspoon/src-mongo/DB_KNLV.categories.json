@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "67ebfee2f8d3b2e3ede2ba7d"
+  },
+  "name": " Miền Bắc"
+},
+{
+  "_id": {
+    "$oid": "67ed0c710018c91a35113362"
+  },
+  "name": " Miền Trung"
+},
+{
+  "_id": {
+    "$oid": "67ed0db10018c91a35113365"
+  },
+  "name": " Miền Nam"
+}]

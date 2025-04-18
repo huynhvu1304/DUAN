@@ -1,0 +1,20 @@
+<p>lienhe works!</p>
+<h1>{{'việt nam'| uppercase}}</h1>
+<h1>Gọi tôi:  {{"0987654321" | percent}}</h1> 
+<img *ngIf="show" src="{{imgURL}}" alt=""> 
+<button (click)="showhide()">Ẩn hiện chữ</button>
+<div [ngSwitch]="gender">
+    <h1 *ngSwitchCase="'nam'">Giới tính: nam</h1>
+    <h1 *ngSwitchCase="'nu'">Giới tính: nữ</h1>
+    <h1 *ngSwitchDefault>Giới tính: khác</h1>
+</div>
+<h1 [ngStyle]="{'color': isRed ? 'red' : isBlue ? 'blue' : isGreen ? 'green' : 'yellow'}">
+    Dòng chữ này sẽ đổi màu
+  </h1>
+  <button (click)="doimauchu()">Đổi màu chữ</button>
+
+  <h3 [ngStyle]="{'color': statusColor}">
+    Trạng thái: {{ order.status }}
+  </h3>
+  
+  

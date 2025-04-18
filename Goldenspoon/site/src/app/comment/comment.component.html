@@ -1,0 +1,21 @@
+<section class="comments">
+  <h2>Ý Kiến Đóng Góp, Ý Tưởng!</h2>
+
+  <!-- Form thêm bình luận -->
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <textarea
+      formControlName="content"
+      placeholder="Viết ý kiến của bạn..."
+      required
+    ></textarea>
+    <button type="submit" [disabled]="commentForm.invalid">Gửi Ý Kiến</button>
+  </form>
+
+  <!-- Hiển thị danh sách bình luận -->
+  <div *ngFor="let comment of comments" class="comment">
+    <p><strong>{{ comment.userId?.name || 'Ẩn danh' }}</strong> 
+      <span class="comment-time"> {{ comment.createdAt | date: 'short' }}</span>
+    </p>
+    <p>{{ comment.content }}</p>
+  </div>
+</section>

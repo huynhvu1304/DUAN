@@ -1,0 +1,41 @@
+<nav>
+    <!-- Banner quảng cáo -->
+    <div class="banner">
+        <img src="https://monngonmoingay.com/wp-content/uploads/2024/03/master-banner-01-2803.jpeg.webp" alt="Quảng cáo Gyoza">
+    </div>
+
+    <!-- Thanh tìm kiếm -->
+    <div class="search-container">
+        <h2>Hơn <b>20</b> Công thức món ngon và dễ làm</h2>
+        <form class="search-box" (ngSubmit)="onSearch()" #searchForm="ngForm">
+            <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+            <input type="search" placeholder="Tìm kiếm món ăn" name="search" [(ngModel)]="keyword">
+            <button type="submit">➡</button>
+        </form>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <h2 class="main-title">Món Ngon Xu Hướng</h2>
+        <div class="food-grid">
+            <div class="food-item" *ngFor="let product of gethot">
+                <div class="image-container">
+                    <a [routerLink]="['/chitiet', product._id]">
+                        <img [src]="apiUrl + '/images/' + product.thong_tin_mon_an.img" alt="Bánh Bông Lan Bơ Hành">
+                    </a>
+                </div>
+                <p class="food-name">{{product.thong_tin_mon_an.ten_mon}}</p>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="featured-recipes">
+            <div class="recipes-container">
+                <app-listcard [data]="getMienBac" [title]="'Món ăn miền Bắc'"></app-listcard>
+                <app-listcard [data]="getMienTrung" [title]="'Món ăn miền Trung'"></app-listcard>
+                <app-listcard [data]="getMienNam" [title]="'Món ăn miền Nam'"></app-listcard>
+            </div>
+        </div>
+    </section>
+</main>

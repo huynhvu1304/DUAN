@@ -1,0 +1,10 @@
+.no-results {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+  }
+  
+  .no-results p {
+    margin: 0;
+    font-size: 16px;
+  }

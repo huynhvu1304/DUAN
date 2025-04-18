@@ -1,0 +1,110 @@
+/* --- Footer chính --- */
+.footer {
+    background-color: #333; /* Màu nền tối */
+    color: #fff; /* Màu chữ trắng */
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+
+/* Bố cục nội dung footer */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px; /* Khoảng cách giữa các mục */
+    max-width: 1200px;
+    margin: 0 auto; /* Căn giữa */
+}
+
+/* Mỗi mục trong footer */
+.footer-section {
+    flex: 1;
+    margin: 20px;
+    min-width: 250px; /* Chiều rộng tối thiểu */
+}
+
+.footer-section h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #ff6f61; /* Màu vàng nổi bật */
+}
+
+.footer-section p,
+.footer-section ul li a {
+    line-height: 1.6;
+    color: #fff; /* Màu chữ trắng */
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+/* Link trong footer */
+.footer-section a {
+    color: #ffcc00; /* Màu vàng chủ đạo */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #ff6f61;
+    text-decoration: underline;
+}
+
+/* Biểu tượng mạng xã hội */
+.social-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ff6f61;
+}
+
+/* Đường viền và phần dưới footer */
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid #444;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    font-size: 14px;
+    color: #777; /* Màu chữ nhạt */
+}
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Chuyển thành dạng dọc khi màn hình nhỏ */
+        text-align: center;
+        gap: 10px;
+    }
+
+    .footer-section {
+        width: 100%; /* Mỗi mục chiếm toàn bộ chiều rộng */
+        min-width: unset;
+        margin: 10px 0; /* Giảm khoảng cách */
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .footer-bottom {
+        padding: 15px 10px;
+    }
+}

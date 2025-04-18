@@ -1,0 +1,80 @@
+<div class="container-xl my-5">
+    <h4 class="mb-4">Giỏ Hàng</h4>
+    <div class="row">
+      <!-- Danh sách sản phẩm (bên trái) -->
+      <div class="col-xl-8 col-lg-8 mb-4">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr class="text-center">
+                <th scope="col" class="text-start">Sản phẩm</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Thành tiền</th>
+                <th scope="col">Xóa</th>
+              </tr>
+            </thead>
+            <tbody class="text-center">
+              <tr *ngFor="let p of cart">
+                <td class="text-start">
+                  <div class="d-flex align-items-center">
+                    <div class="me-3">
+                      <img class="img-thumbnail" width="150" src="assets/img/{{p.img}}" alt="Tour {{p.name}}">
+                    </div>
+                    <div>
+                      <strong>{{p.name}}</strong>
+                    </div>
+                  </div>
+                </td>
+                <td><span>{{p.sale | number}}</span></td>
+                <td>
+                  <input type="number" [(ngModel)]="p.quantity" min="1" class="form-control form-control-sm text-center" style="width:80px;">
+                </td>
+                <td><span>{{p.sale * p.quantity | number}}</span></td>
+                <td>
+                  <button  (click)="removeItem(p._id)" class="btn btn-danger btn-sm">
+                    <i class="bi bi-trash3"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Tóm tắt giỏ hàng (bên phải) -->
+      <div class="col-xl-4 col-lg-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Tóm tắt giỏ hàng</h5>
+            <hr>
+            <div class="d-flex justify-content-between mb-3">
+              <span>Tổng tiền</span>
+              <span class="fw-bold">{{ sumMoney() | number }}</span>
+            </div>
+            <form>
+              <div class="mb-3">
+                <label for="voucher" class="form-label">Mã giảm giá</label>
+                <div class="input-group">
+                  <input type="text" id="voucher" class="form-control" placeholder="Voucher">
+                  <button type="button" class="btn btn-outline-secondary">
+                    <i class="bi bi-chevron-double-right"></i>
+                  </button>
+                </div>
+              </div>
+              <p class="text-end text-danger">0đ</p>
+              <hr>
+              <div class="d-flex justify-content-between mb-3">
+                <span>Tạm tính</span>
+                <span class="fw-bold">{{ sumMoney() | number }}</span>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Đặt hàng</button>
+              <hr>
+              <a href="../trangchu/trangchu.html" class="text-decoration-none">
+                <i class="bi bi-arrow-left"></i> Tiếp tục mua hàng
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

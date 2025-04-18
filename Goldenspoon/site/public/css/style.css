@@ -1,0 +1,546 @@
+/* --- Reset và Cấu hình chung --- */
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    
+}
+ #banhkem {
+    scroll-margin-top: 100px; /* Điều chỉnh khoảng cách khi cuộn */
+}
+#sinhnhat {
+    scroll-margin-top: 100px; /* Điều chỉnh khoảng cách khi cuộn */
+} 
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    
+}
+
+/* --- Chạy chữ (Scrolling Text) --- */
+.animation, .animation1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    overflow: hidden; /* Ẩn phần chữ vượt ra ngoài */
+}
+
+.animation {
+    height: 40px;
+    background-color: #b80c0c; /* Màu đỏ sẫm */
+    overflow: hidden; /* Rất quan trọng */
+}
+
+.animation1 {
+    height: 80px;
+    background-color: #ffffff; /* Màu trắng */
+}
+
+.running-text {
+    font-size: 17px;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    
+    animation: running-text-animation 13s linear infinite; /* Sử dụng animation */
+}
+
+@keyframes running-text-animation {
+    0% { transform: translateX(100%); } /* Chuyển chữ ra ngoài khung hiển thị */
+    100% { transform: translateX(-120%); } /* Chuyển chữ qua từ bên phải sang trái */
+}
+
+/* --- Thanh điều hướng (Navigation Bar) --- */
+nav {
+    background-color: #ffffff; /* Màu trắng */
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa menu */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho thanh menu */
+    padding: 0 20px; /* Thêm padding trái phải để tạo khoảng cách */
+    position: sticky; /* Sticky menu */
+    top: 0; /* Dính menu ở mép trên khi lướt */
+    z-index: 1000; /* Menu luôn nằm trên các phần khác */
+    
+}
+
+/* --- Logo --- */
+.logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6f61; /* Màu chủ đạo */
+}
+
+/* --- Container Menu --- */
+.menu-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: 100px; /* Căn phải thêm */
+  
+}
+
+
+/* --- Menu chính --- */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Sử dụng Flexbox để căn chỉnh */
+    align-items: center;
+    gap: 20px; /* Khoảng cách giữa các mục menu */
+}
+
+.menu ul li {
+    position: relative;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #ff6f61; /* Màu chủ đạo */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa icon và text */
+}
+
+.menu ul li a:hover {
+    background-color: #ff6f61; /* Màu nền khi hover */
+    color: #ffffff; /* Màu chữ khi hover */
+}
+
+/* --- Dropdown Menu --- */
+.menu ul ul {
+    display: none; /* Ẩn menu con ban đầu */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; /* Màu nền trắng */
+    padding: 10px 0;
+    border-radius: 5px;
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown */
+    z-index: 100; /* Đảm bảo dropdown nằm trên các phần tử khác */
+}
+
+.menu ul li:hover > ul {
+    display: block; /* Hiển thị menu con khi hover */
+}
+
+.menu ul ul li {
+    padding: 5px 20px;
+    white-space: nowrap; /* Đảm bảo không xuống dòng trong dropdown */
+}
+
+.menu ul ul li a {
+    color: #ff6f61; /* Màu chữ chủ đạo */
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu ul ul li a:hover {
+    background-color: #ff6f61; /* Màu nền khi hover */
+    color: #ffffff; /* Màu chữ khi hover */
+    border-radius: 5px;
+}
+
+/* --- Hiệu ứng border-bottom khi hover --- */
+.menu ul li a:hover {
+    border-bottom: 2px solid #ff6f61;
+}
+
+/* --- Chạy chữ dưới thanh menu --- */
+.animation, .animation1 {
+    background-color: #ff6f61; /* Màu chủ đạo */
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}   
+
+/* --- Hình ảnh chính (Banner) --- */
+.fullanh img {
+    width: 100%;
+    height: 580px;
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy không bị biến dạng */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho ảnh */
+}
+/* assurance box */
+.assurance {
+    width: 100%;
+    margin-top: 100px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;  
+    padding: 0 3%; 
+}
+
+/* Các box con */
+.assurance > div {
+    width: 400px;
+    flex: 1; 
+    background-color: #fefefe; 
+    padding: 15px;  
+    border-radius: 15px;  
+    text-align: center;
+}
+
+.assurance h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;  
+    color: #333333; 
+}
+
+.assurance p {
+    font-size: 1em;
+    color: #555555; 
+}
+.assurance img{
+    width: 130px;
+    height: auto;
+}
+/* bài viết */
+/* Container chính cho các box */
+.content-boxes {
+    display: flex; /* Sử dụng flexbox */
+    justify-content: space-between; /* Khoảng cách đều giữa các box */
+    align-items: stretch; /* Đảm bảo các box có chiều cao bằng nhau */
+    gap: 20px; /* Khoảng cách giữa các box */
+    padding: 20px;
+}
+
+/* Thiết kế cho từng box */
+.box {
+    flex: 1; /* Kích thước các box chia đều */
+    max-width: 25%; /* Đảm bảo mỗi box không vượt quá 25% chiều rộng */
+    background-color: #f9f9f9; /* Màu nền nhạt */
+    border: 1px solid #ddd; /* Đường viền */
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hiệu ứng hover */
+.box:hover {
+    transform: translateY(-5px); /* Nâng box lên */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Tăng đổ bóng */
+    cursor: pointer;
+}
+.box:hover .btn {
+    /* transform: translateY(-5px); Nâng box lên */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Tăng đổ bóng */
+    cursor: pointer;
+    color: #fff;
+}
+
+/* Ảnh trong box */
+.box img {
+    width: 100%; /* Ảnh rộng toàn box */
+    height: auto; /* Giữ tỉ lệ ảnh */
+}
+
+/* Tiêu đề trong box */
+.box h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Nội dung trong box */
+.box p {
+    font-size: 1em;
+    color: #555;
+    line-height: 1.5;
+}
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff6e61;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+/* --- Container chứa sản phẩm --- */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* --- Chữ vào giữa --- */
+.center p {
+    text-align: center;
+    margin: 20px 0;
+    padding-top: 10px;
+    color: #ff6f61; /* Màu chủ đạo */
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* --- Hộp sản phẩm --- */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+    
+}
+
+.col1 {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1 1 calc(33.333% - 20px); /* Căn giữa và độ rộng tự động */
+    max-width: calc(33.333% - 20px); /* Đảm bảo các sản phẩm có kích thước bằng nhau */
+    margin-top: 20px;
+}
+
+.col1 img {
+    width: 100%;
+    height: 320px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.col1 img:hover {
+    transform: scale(1.05); /* Phóng to ảnh khi hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Đổ bóng lớn hơn khi hover */
+}
+
+.chu {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #333;
+    font-weight: bold;
+}
+
+.price {
+    color: #ff6f61; /* Màu chủ đạo */
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.buy, .giohang {
+    margin: 10px 0;
+}
+
+.giohang a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.buy a{
+    text-decoration: none;
+    padding: 10px 37px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* Nút "Mua ngay" */
+.buy a {
+    background-color: #ff6f61; /* Màu nền chủ đạo */
+    color: white;
+    border: none;
+}
+
+.buy a:hover {
+    background-color: #e05a50; /* Màu nền khi hover */
+}
+
+/* Nút "Thêm vào giỏ" */
+.giohang a {
+    background-color: #ffffff;
+    color: #ff6f61; /* Màu chữ chủ đạo */
+    border: 2px solid #ff6f61; /* Viền */
+}
+
+.giohang a:hover {
+    background-color: #ff6f61; /* Màu nền khi hover */
+    color: white;
+}
+
+/* Đảm bảo các phần tử giỏ hàng và mua ngay không bị xếp chồng */
+.giohang a, .buy a {
+    margin-right: 10px;
+}
+
+/* Hiệu ứng khi hover qua toàn bộ sản phẩm */
+.col1:hover {
+    transform: translateY(-10px); /* Đưa sản phẩm lên trên khi hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* Đổ bóng đậm hơn */
+    cursor: pointer;
+}
+
+
+/* --- Hình ảnh top người ăn --- */
+.anhtop img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover; /* Đảm bảo ảnh lấp đầy không bị biến dạng */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho ảnh */
+    display: block;
+    margin: 20px auto; /* Căn giữa ảnh */
+}
+
+/* Responsive cho màn hình nhỏ */
+@media (max-width: 1170px) {
+    .menu-container {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .assurance {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content-boxes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .box {
+        max-width: 100%;
+    }
+
+    .col1 {
+        max-width: 90%;
+    }
+    .fullanh img {
+        height: auto;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .animation1 {
+        font-size: 14px;
+        height: auto;
+        padding: 5px;
+    }
+
+    nav {
+        flex-direction: column;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .logo {
+        position: static;
+        transform: none;
+        margin-bottom: 10px;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .fullanh img {
+        height: auto;
+    }
+
+    .assurance > div {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .col1 {
+        flex: 1 1 100%;
+    }
+}
+
+
+.menu {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-toggle {
+    display: none; /* Ẩn mặc định trên PC */
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Khi màn hình nhỏ (dưới 768px) */
+@media screen and (max-width: 1170px) {
+    .menu {
+        display: none; /* Ẩn menu */
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px 0;
+    }
+
+    .menu-toggle {
+        display: block; /* Hiện nút 3 gạch */
+    }
+
+    .menu.active {
+        display: flex; /* Hiện menu khi có class 'active' */
+    }
+}

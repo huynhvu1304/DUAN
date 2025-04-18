@@ -1,0 +1,96 @@
+<!-- Main Content -->
+ <div class="main-wrapper">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-content">
+            <h3>Miền quốc gia</h3>
+            <p>{{productDetail.thong_tin_mon_an.mien_quoc_gia}}</p>
+            <h3>THỜI GIAN</h3>
+            <p>Thực hiện: {{productDetail.cach_lam.thoi_gian_lam}}</p>
+            <p>Chuẩn bị: 15 phút</p>
+            <h3>NGUYÊN LIỆU</h3>
+            <p>Khẩu phần: {{productDetail.nguyen_lieu.khau_phan}}</p>
+            <p>Calo: 350kcal</p>
+            <h3>THÊM VÀO YÊU THÍCH</h3>
+            <button class="favorite-btn" (click)="addToFavorite()" [disabled]="isFavorite">
+                {{ isFavorite ? 'Đã yêu thích' : 'Thêm vào yêu thích' }}
+              </button>
+              
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="dish-name">{{productDetail.thong_tin_mon_an.ten_mon}}</h1>
+            <img
+            [src]="apiUrl + '/images/' + productDetail.thong_tin_mon_an.img"
+            [alt]="productDetail.thong_tin_mon_an.ten_mon"
+          />          
+        </section>
+
+        <!-- Description -->
+        <section class="description">
+            <h2>Mô Tả</h2>
+            <p>{{productDetail.thong_tin_mon_an.mo_ta_ngan}}</p>
+        
+        </section>
+
+        <!-- Ingredients -->
+        <section class="ingredients">
+            <h2>Nguyên Liệu</h2>
+            <ul>
+                <li *ngFor="let ingredient of productDetail.nguyen_lieu.danh_sach_nguyen_lieu">
+                    {{ingredient.ten}} - {{ingredient.so_luong}}
+                </li>
+            </ul>
+            <h3>Gợi Ý Thay Thế</h3>
+            <ul>
+                <li *ngFor="let suggestion of productDetail.nguyen_lieu.de_tim_kiem.goi_y_thay_the">
+                    {{suggestion}}
+                </li>
+            </ul>
+        </section>
+
+        <!-- Steps -->
+        <section class="steps">
+            <h2>Thực Hiện</h2>
+            <!-- <button class="toggle-steps-btn">Ẩn/Hiện các bước</button> -->
+            <div class="steps-content">
+                <div class="step" *ngFor="let step of productDetail.cach_lam.cac_buoc_thuc_hien">
+                    <h3>Bước {{step.buoc}}: {{step.ten_buoc}}</h3>
+                    <p>Thời gian: {{step.thoi_gian}}</p>
+                    <ul>
+                        <li *ngFor="let detail of step.chi_tiet">{{detail}}</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nutrition -->
+        <section class="nutrition">
+            <h2>Danh Sách Dụng Cụ</h2>
+            <ul>
+                <li *ngFor="let tool of productDetail.dung_cu_can_thiet.danh_sach_dung_cu">
+                    {{tool}}
+                </li>
+            </ul>
+        </section>
+
+        <!-- Tips -->
+        <section class="tips">
+            <h2>Điều Chỉnh Khẩu Vị</h2>
+            <ul>
+                <li *ngFor="let tip of productDetail.kha_nang_tuy_bien.dieu_chinh_khau_vi">
+                    {{tip}}
+                </li>
+            </ul>
+        </section>
+         <!-- Comments -->
+        <!-- Comments Section -->
+        <ng-container *ngIf="productDetail._id">
+          <app-comment [productId]="productDetail._id"></app-comment>
+        </ng-container>
+    </main>
+</div>

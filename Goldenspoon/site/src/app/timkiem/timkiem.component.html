@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="d-flex justify-content-end my-1">
+    </div>
+    
+    <!-- Hiển thị danh sách sản phẩm nếu có kết quả -->
+    <app-listcard 
+        *ngIf="!noResults" 
+        [data]="searchPro" 
+        title="SẢN PHẨM TÌM KIẾM">
+    </app-listcard>
+    
+    <!-- Hiển thị thông báo nếu không tìm thấy -->
+    <div class="no-results" *ngIf="noResults">
+        <p>Món ăn bạn tìm không có trong danh sách.</p>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<!-- <div class="featured-recipes">
+  <h2 class="section-title">Món Ngon Mỗi Ngày</h2>
+  <div class="recipes-container">
+      <div class="recipe-card">
+          <div class="recipe-image">
+              <img src="https://monngonmoingay.com/wp-content/smush-webp/2025/01/26.-SALAD-TAO-PHO-MAI.png.webp" alt="Mì xào bò rau củ">
+              <button class="wishlist-button">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.53L12 21.35z"/>
+                  </svg>
+              </button>
+          </div>
+          <div class="recipe-details">
+              <h3 class="recipe-name">Mì xào bò rau củ</h3>
+              <div class="recipe-info">
+                  <span class="servings"><svg viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4zm-6 8h12v-1c0-2.66-5.33-4-12-4S6 21.34 6 24v1z"/></svg> 4 Người</span>
+                  <span class="difficulty"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h14v2z"/></svg> Dễ</span>
+                  <span class="time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7h1z"/></svg> 15 Phút</span>
+              </div>
+              <button class="view-button">XEM CHI TIẾT &gt;</button>
+          </div>
+      </div>
+       -->
+       <h2 class="section-title">{{title}}</h2>
+       <div class="recipes-container">
+        <div class="recipe-card" *ngFor="let product of data">
+          <div class="recipe-image" >
+            <a [routerLink]="['/chitiet', product._id]">
+                <img
+                  [src]="apiUrl + '/images/' + product.thong_tin_mon_an.img"
+                  [srcset]="apiUrl + '/images/' + product.thong_tin_mon_an.img + ' 2x'"
+                  [alt]="product.thong_tin_mon_an.ten_mon"
+                  class="recipe-image"
+                />
+              </a>
+              
+             <button class="wishlist-button">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.53L12 21.35z"/>
+                  </svg>
+              </button>
+          </div>
+          <div class="recipe-details">
+              <h3 class="recipe-name">{{ product.thong_tin_mon_an.ten_mon }}</h3>
+              <div class="recipe-info">
+                  <span class="servings"><svg viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4zm-6 8h12v-1c0-2.66-5.33-4-12-4S6 21.34 6 24v1z"/></svg> {{product.nguyen_lieu.khau_phan}}</span>
+                  <span class="difficulty"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h14v2z"/></svg> Dễ</span>
+                  <span class="time"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7h1z"/></svg> {{product.cach_lam.thoi_gian_lam}}</span>
+              </div>
+              <button class="view-button" >
+                <a [routerLink]="['/chitiet', product._id]">XEM CHI TIẾT &gt;</a></button>
+          </div>
+      </div>
+    </div>
+
+    

@@ -1,0 +1,269 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+/* menu */
+/* --- Chạy chữ (Scrolling Text) --- */
+.animation, .animation1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.animation {
+    height: 40px;
+    background-color: #b80c0c; /* Màu đỏ sẫm */
+}
+
+.animation1 {
+    height: 80px;
+    background-color: #ffffff; /* Màu trắng */
+}
+
+.running-text {
+    font-size: 17px;
+    white-space: nowrap; /* Ngăn chữ xuống dòng */
+    overflow: hidden; /* Ẩn phần chữ vượt ra ngoài */
+    animation: running-text-animation 13s linear infinite; /* Sử dụng animation */
+}
+
+@keyframes running-text-animation {
+    0% { transform: translateX(100%); } /* Chuyển chữ ra ngoài khung hiển thị */
+    100% { transform: translateX(-170%); } /* Chuyển chữ qua từ bên phải sang trái */
+}
+
+/* --- Thanh điều hướng (Navigation Bar) --- */
+nav {
+    background-color: #ffffff; /* Màu trắng */
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa menu */
+    position: relative;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Thêm đổ bóng cho thanh menu */
+    padding: 0 20px; /* Thêm padding trái phải để tạo khoảng cách */
+}
+
+/* --- Logo --- */
+.logo {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff6f61; /* Màu chủ đạo */
+}
+
+/* --- Container Menu --- */
+.menu-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-left: 100px; /* Căn phải thêm */
+}
+
+/* --- Menu chính --- */
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Sử dụng Flexbox để căn chỉnh */
+    align-items: center;
+    gap: 20px; /* Khoảng cách giữa các mục menu */
+}
+
+.menu ul li {
+    position: relative;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #ff6f61; /* Màu chủ đạo */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa icon và text */
+}
+
+.menu ul li a:hover {
+    background-color: #ff6f61; /* Màu nền khi hover */
+    color: #ffffff; /* Màu chữ khi hover */
+}
+
+/* --- Dropdown Menu --- */
+.menu ul ul {
+    display: none; /* Ẩn menu con ban đầu */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; /* Màu nền trắng */
+    padding: 10px 0;
+    border-radius: 5px;
+    min-width: 150px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho dropdown */
+    z-index: 100; /* Đảm bảo dropdown nằm trên các phần tử khác */
+}
+
+.menu ul li:hover > ul {
+    display: block; /* Hiển thị menu con khi hover */
+}
+
+.menu ul ul li {
+    padding: 5px 20px;
+    white-space: nowrap; /* Đảm bảo không xuống dòng trong dropdown */
+}
+
+.menu ul ul li a {
+    color: #ff6f61; /* Màu chữ chủ đạo */
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.menu ul ul li a:hover {
+    background-color: #ff6f61; /* Màu nền khi hover */
+    color: #ffffff; /* Màu chữ khi hover */
+    border-radius: 5px;
+}
+
+/* --- Hiệu ứng border-bottom khi hover --- */
+.menu ul li a:hover {
+    border-bottom: 2px solid #ff6f61;
+}
+
+/* --- Chạy chữ dưới thanh menu --- */
+.animation, .animation1 {
+    background-color: #ff6f61; /* Màu chủ đạo */
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}   
+
+
+.container-fluid {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.bg-light {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.bg-secondary {
+    background-color: rgb(114, 114, 114);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    background-color: #ff6f61;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+h5, h6 {
+    margin: 0 0 10px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.font-weight-medium {
+    font-weight: 500;
+}
+
+.font-weight-bold {
+    font-weight: 700;
+}
+
+.py-3 {
+    padding: 12px 20px;
+    
+}
+
+.p-30 {
+    padding: 30px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.product-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.product-item h6 {
+    flex: 1;
+    margin: 0;
+    font-size: 14px;
+}
+
+.product-item .price {
+    font-weight: bold;
+}

@@ -1,0 +1,33 @@
+<div class="container-5">
+  <table id="favoriteTable">
+    <thead>
+      <tr>
+        <th>Ảnh</th>
+        <th>Tên Món</th>
+        <th>Thời Gian</th>
+        <th>Miền Quốc Gia</th> <!-- ✅ Đã sửa -->
+        <th>Hành Động</th>
+      </tr>
+    </thead>
+    <tbody id="favoriteList">
+      <tr *ngFor="let item of favoriteProducts">
+        <td>
+          <img [src]="environment.apiUrl + '/images/' + item.thong_tin_mon_an.img" style="width: 120px; border-radius: 5px;" alt="">
+        </td>
+        <td>{{ item.thong_tin_mon_an.ten_mon }}</td>
+        <td>{{ item.cach_lam.thoi_gian_lam }}</td>
+        <td>{{ item.thong_tin_mon_an.mien_quoc_gia }}</td>
+        <td>
+          <button class="btn remove-btn" (click)="removeFromFavorite(item._id)">Xóa</button>
+          <button class="btn remove-btn" [routerLink]="['/chitiet', item._id]">Xem chi tiết</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Empty State -->
+  <div class="empty-state" id="emptyState" *ngIf="favoriteProducts.length === 0">
+    <span>🍽️</span><br />
+    Chưa có món ăn nào trong danh sách yêu thích!
+  </div>
+</div>

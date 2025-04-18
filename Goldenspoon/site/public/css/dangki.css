@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.br {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.name span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FF6F61;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #3D464D;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: #FF6F61;
+    outline: none;
+}
+
+.log-sign .right {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+    background-color: #FF6F61;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e65a50;
+}
+
+button:active {
+    background-color: #cc5046;
+}
+.but {
+    text-align: center;
+    margin-top: 15px;
+}
+a {
+    text-decoration: none;
+    color: #FF6F61;
+    font-size: 14px;
+}
+a:hover {
+    text-decoration: underline;
+}
+@media screen and (max-width: 768px) {
+    .br {
+        width: 90%; /* Make the container take up 90% of the screen width */
+        margin: 20px auto; /* Reduce margin on smaller screens */
+        padding: 15px; /* Reduce padding */
+    }
+
+    .name span {
+        font-size: 20px; /* Adjust the font size for smaller screens */
+    }
+
+    label {
+        font-size: 12px; /* Adjust label font size for mobile */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 8px; /* Adjust padding for inputs on smaller screens */
+        margin-bottom: 12px; /* Reduce margin */
+    }
+
+    button {
+        padding: 8px 16px; /* Adjust button padding */
+        font-size: 12px; /* Reduce font size */
+    }
+
+    .log-sign .right {
+        flex-direction: column; /* Stack buttons vertically */
+        align-items: center; /* Center buttons */
+    }
+}
