@@ -120,8 +120,30 @@ nav {
 }
 
 .menu ul li a:hover {
-    background-color: #ff6f61; /* Màu nền khi hover */
-    color: #ffffff; /* Màu chữ khi hover */
+    background-color: #ff6f61; 
+    color: #ffffff; 
+}
+.menu ul li button {
+    font-size: 16px;
+    color: #ff6f61; /* Màu chủ đạo */
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa icon và text */
+    border: none; 
+    outline: none; 
+    background: none;
+
+}
+
+.menu ul li button:hover {
+    background-color: #ff6f61; 
+    color: #ffffff; 
+    border: none; 
+    outline: none; 
 }
 
 /* --- Dropdown Menu --- */
@@ -177,7 +199,7 @@ nav {
 /* --- Hình ảnh chính (Banner) --- */
 .fullanh img {
     width: 100%;
-    height: 580px;
+    height: 550px;
     object-fit: cover; /* Đảm bảo ảnh lấp đầy không bị biến dạng */
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng cho ảnh */
@@ -185,7 +207,7 @@ nav {
 /* assurance box */
 .assurance {
     width: 100%;
-    margin-top: 100px;
+    margin-top: 40px;
     height: auto;
     display: flex;
     justify-content: space-between;
@@ -236,6 +258,8 @@ nav {
     padding: 15px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Hiệu ứng hover */
@@ -269,16 +293,17 @@ nav {
     font-size: 1em;
     color: #555;
     line-height: 1.5;
+    flex-grow: 1;
 }
 .btn {
     display: inline-block;
-    margin-top: 10px;
     padding: 10px 20px;
     background-color: #ff6e61;
-    color: black;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
+    margin-top: auto;
 }
 
 .btn:hover {
@@ -296,7 +321,6 @@ nav {
 /* --- Chữ vào giữa --- */
 .center p {
     text-align: center;
-    margin: 20px 0;
     padding-top: 10px;
     color: #ff6f61; /* Màu chủ đạo */
     font-size: 24px;
@@ -419,6 +443,71 @@ nav {
     display: block;
     margin: 20px auto; /* Căn giữa ảnh */
 }
+/* sap xep , loc gia */
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+    flex-wrap: wrap; /* Cho phép các phần tử xuống dòng nếu không đủ không gian */
+}
+
+.form-select, .form-range {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.form-select {
+    background-color: #fff;
+    color: #333;
+}
+
+.form-range {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #FF6F61;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.form-range::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #FF6F61;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+p {
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.filter-container {
+    flex: 1;
+    max-width: 300px; /* Giới hạn chiều rộng */
+}
+
+select.form-select, input.form-range {
+    max-width: 100%;
+}
 
 /* Responsive cho màn hình nhỏ */
 @media (max-width: 1170px) {
@@ -479,7 +568,9 @@ nav {
         flex-direction: column;
         gap: 5px;
     }
-
+    .menu ul li.search-form-item {
+        order: -1; 
+    }
     .fullanh img {
         height: auto;
     }
@@ -498,7 +589,7 @@ nav {
     }
 }
 
-
+/* nút 3 gạch toggle đt */
 .menu {
     display: flex;
     justify-content: center;

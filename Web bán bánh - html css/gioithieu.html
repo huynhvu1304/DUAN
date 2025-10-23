@@ -23,32 +23,40 @@
         <div class="logo">
             CAKE VU
         </div>
-        <button class="menu-toggle">&#9776;</button> <!-- Nút mở menu -->
+        <button class="menu-toggle">&#9776;</button>
         <div class="menu-container">
             <div class="menu">
                 <ul>
-                    <li> <a href="index.html">TRANG CHỦ</a></li>
-                    <li></i> <a href="index.html">SẢN PHẨM</a>
+                    <li><a href="index.html">TRANG CHỦ</a></li>
+                    <li>
+                        <button>SẢN PHẨM</button>
                         <ul>
-                            <li><a href="index.html#banhkem">BÁNH KEM LẠNH</a></li>
-                            <li><a href="index.html#sinhnhat">BÁNH SINH NHẬT</a></li>
+                            <li><a href="#banhkem">BÁNH KEM LẠNH</a></li>
+                            <li><a href="#sinhnhat">BÁNH SINH NHẬT</a></li>       
                         </ul>
                     </li>
-                    <li></i> <a href="gioithieu.html">GIỚI THIỆU</a></li>
-                    <li></i> <a href="lienhe.html">LIÊN HỆ - ĐỊA CHỈ</a></li>
-                    <li></i> <a href="dangnhap.html">ĐĂNG NHẬP</a></li>
-                    <li></i> <a href="dangki.html">ĐĂNG KÍ</a></li>
-                    <li></i> <a href="cart.html">GIỎ HÀNG</a></li>
-                    <form class="search-form" (ngSubmit)="onSearch()">
-                        <input 
-                            class="search-input" 
-                            type="search" 
-                            placeholder="Nhập tên" 
-                            name="search" 
-                            [(ngModel)]="keyword"
-                        >
-                        <input class="search-button" type="submit" value="Tìm">
-                    </form>
+                    <li><a href="gioithieu.html">GIỚI THIỆU</a></li>
+                    <li><a href="lienhe.html">LIÊN HỆ - ĐỊA CHỈ</a></li>
+
+                    <li>
+                        <form class="search-form">
+                            <input 
+                                class="search-input" 
+                                type="search" 
+                                placeholder="Nhập tên" 
+                                name="search"
+                            >
+                            <input class="search-button" type="submit" value="Tìm">
+                        </form>
+                    </li>
+                    <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+                                        <li>
+                        <button><i class="fa-solid fa-user"></i></button>
+                        <ul>
+                            <li><a href="dangnhap.html">ĐĂNG NHẬP</a></li>
+                            <li><a href="dangki.html">ĐĂNG KÍ</a></li> 
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
