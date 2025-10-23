@@ -1,0 +1,431 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="page-header d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3">
+      <div class="page-title mb-2 mb-md-0">
+        <h4>Danh Sách Sản Phẩm</h4>
+        <h6>Quản lý sản phẩm của bạn</h6>
+      </div>
+      <div class="page-btn">
+        <button class="btn btn-added" (click)="openAddModal()">
+          <img src="assets/img/icons/plus.svg" alt="img" class="me-1">Thêm Sản Phẩm Mới
+        </button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <mat-form-field appearance="outline" class="w-100 mb-3">
+          <mat-label>Tìm kiếm</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Nhập tên sản phẩm...">
+        </mat-form-field>
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 w-100">
+            <ng-container matColumnDef="stt">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> STT </th>
+              <td mat-cell *matCellDef="let product; let i = index"> {{ i + 1 + (paginator ? paginator.pageIndex * paginator.pageSize : 0) }} </td>
+            </ng-container>
+            <ng-container matColumnDef="image">
+              <th mat-header-cell *matHeaderCellDef> Ảnh </th>
+              <td mat-cell *matCellDef="let product">
+                <div class="product-img">
+                  <img style="width: 60px; height: 60px; object-fit: contain;" [src]="imageBaseUrl + product.images_main" alt="product image" onerror="this.src='assets/img/default-product.png';">
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Tên Sản Phẩm </th>
+              <td mat-cell *matCellDef="let product">
+                <div class="productimgname ">
+                  <a href="javascript:void(0);">{{ product?.name | slice:0:15 }}{{ product?.name.length > 15 ? '...' : '' }}</a>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="category">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Danh Mục </th>
+              <td mat-cell *matCellDef="let product"> {{ product?.categoryId?.name }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="brand">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Thương Hiệu </th>
+              <td mat-cell *matCellDef="let product"> {{ product?.brand?.name }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Giá </th>
+              <td mat-cell *matCellDef="let product"> {{ getPriceRange(product) }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="hot">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Hot </th>
+              <td mat-cell *matCellDef="let product">
+                <button class="btn btn-toggle" (click)="toggleHot(product)">
+                  <i class="bi" [ngClass]="product.hot === 1 ? 'bi-star-fill text-warning' : 'bi-star text-secondary'"></i>
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="purchases">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Lượt Mua </th>
+              <td mat-cell *matCellDef="let product"> {{ product?.purchases }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Thao Tác </th>
+              <td mat-cell *matCellDef="let product">
+                <button class="me-3 btn btn-link p-0 text-primary" (click)="openDetailModal(product)" data-bs-toggle="tooltip" title="Xem Chi Tiết">
+                  <img src="assets/img/icons/eye.svg" alt="img" class="align-middle">
+                </button>
+                <button class="me-3 btn btn-link p-0 text-primary" (click)="openEditModal(product)">
+                  <img src="assets/img/icons/edit.svg" alt="img" class="align-middle">
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ẩn/Hiện </th>
+              <td mat-cell *matCellDef="let product">
+                <label class="switch">
+                  <input type="checkbox" [checked]="product.status === 'active'" (change)="toggleStatus(product)">
+                  <span class="slider round"></span>
+                </label>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index: 1040;" *ngIf="isAddModalOpen"></div>
+
+  <div class="modal" tabindex="-1" [ngClass]="{ 'show': isAddModalOpen }" style="display: block;" *ngIf="isAddModalOpen">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Thêm sản phẩm</h5>
+          <button type="button" class="btn-close" (click)="closeModal()">x</button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+            <div class="mb-3">
+              <label for="name" class="form-label">Tên sản phẩm</label>
+              <input type="text" id="name" formControlName="name" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label for="brandId" class="form-label">Thương hiệu</label>
+              <select id="brandId" formControlName="brandId" class="form-select">
+                <option value="" disabled selected>Chọn thương hiệu</option>
+                <option *ngFor="let brand of brands" [value]="brand._id">{{ brand.name }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="categoryId" class="form-label">Danh mục</label>
+              <select id="categoryId" formControlName="categoryId" class="form-select">
+                <option *ngFor="let category of categories" [value]="category._id">{{ category.name }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="img" class="form-label">Hình ảnh chính</label>
+              <input type="file" id="img" #mainImageInput (change)="onFileSelect($event)" class="form-control" />
+              <div *ngIf="productImagePreview" class="mt-2">
+                <img [src]="productImagePreview" alt="Preview" class="img-thumbnail img-fluid" style="max-width: 200px; height: auto;" />
+                <button type="button" class="btn btn-sm btn-outline-danger mt-1" (click)="removeMainImage()">Xóa ảnh</button>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Mô tả</label>
+              <editor
+                formControlName="description"
+                [apiKey]="'0cl1kuehp4s9or9e85fdkffpj3sanw9kmkeu2gyq8gyau1g0'"
+                [init]="{
+                                height: 500,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste help wordcount',
+                                    'formatpainter',
+                                    'quickbars',
+                                    'code',
+                                    'preview',
+                                    'wordcount',
+                                    'accordion',
+                                    'table',
+                                    'fontfamily',
+                                    'fontsize',
+                                    'colorpicker',
+                                    'textcolor'
+                                ],
+                                toolbar:
+                                    'undo redo | styleselect | formatselect | fontfamily fontsize | ' +
+                                    'bold italic underline strikethrough | forecolor backcolor | ' +
+                                    'alignleft aligncenter alignright alignjustify | ' +
+                                    'bullist numlist outdent indent | ' +
+                                    'link image table | fullscreen preview code | help',
+                                block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Preformatted=pre',
+                                font_family_formats: 'Arial=arial,helvetica,sans-serif;Times New Roman=times new roman,times,serif;Custom Font=custom-font,sans-serif;',
+                                font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt 48pt'
+                                }"
+              ></editor>
+              <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">
+                Mô tả sản phẩm là bắt buộc.
+              </div>
+            </div>
+
+            <div formArrayName="variants">
+              <h5>Biến thể sản phẩm</h5>
+              <div *ngFor="let variant of variantControls; let i = index" [formGroupName]="i" class="border p-3 mb-3 rounded">
+                <div class="row g-2">
+                  <div class="col-12 col-md-2">
+                    <label class="form-label">Size</label>
+                    <input type="text" formControlName="size" class="form-control" placeholder="Size" />
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <label class="form-label">Màu sắc</label>
+                    <input type="text" formControlName="color" class="form-control" placeholder="Color" />
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <label class="form-label">Giá gốc</label>
+                    <input type="number" formControlName="cost_price" class="form-control" min="0" />
+                    <div *ngIf="variant.get('cost_price')?.errors?.['min'] && variant.get('cost_price')?.touched" class="text-danger">
+                      Giá gốc không được nhỏ hơn 0
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <label class="form-label">Giá giảm</label>
+                    <input type="number" formControlName="sale_price" class="form-control" min="0" />
+                    <div *ngIf="variant.get('sale_price')?.errors?.['min'] && variant.get('sale_price')?.touched" class="text-danger">
+                      Giá giảm không được nhỏ hơn 0
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <label class="form-label">Tồn kho</label>
+                    <input type="number" formControlName="stock" class="form-control" min="0" />
+                    <div *ngIf="variant.get('stock')?.errors?.['min'] && variant.get('stock')?.touched" class="text-danger">
+                      Tồn kho không được nhỏ hơn 0
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-2">
+                    <label class="form-label">Ảnh biến thể</label>
+                    <input type="file" (change)="onVariantImageSelect($event, i)" class="form-control" />
+                    <div *ngIf="variantImagePreviews[i]" class="mt-2">
+                      <img [src]="variantImagePreviews[i]" alt="Preview" class="img-thumbnail img-fluid" style="max-width: 130px; height: auto;" />
+                      <button type="button" class="btn btn-sm btn-outline-danger mt-1" (click)="removeVariantImage(i)">Xóa ảnh</button>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-danger btn-sm mt-2" (click)="removeVariant(i)">Xóa biến thể</button>
+              </div>
+
+
+              <button type="button" class="btn btn-secondary" (click)="addVariant()">Thêm biến thể</button>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Thêm sản phẩm</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index: 1040;" *ngIf="isEditModalOpen"></div>
+  <div class="modal" tabindex="-1" [ngClass]="{ 'show': isEditModalOpen }" style="display: block;" *ngIf="isEditModalOpen">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Sửa sản phẩm</h5>
+          <button type="button" class="btn-close" (click)="closeModal()">x</button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="editForm" (ngSubmit)="updateProduct()">
+            <div class="mb-3">
+              <label for="editName" class="form-label">Tên sản phẩm</label>
+              <input type="text" id="editName" formControlName="name" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="editBrandId" class="form-label">Thương hiệu</label>
+              <select id="editBrandId" formControlName="brandId" class="form-select">
+                <option *ngFor="let brand of brands" [value]="brand._id">
+                  {{ brand.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="editCategoryId" class="form-label">Danh mục</label>
+              <select id="editCategoryId" formControlName="categoryId" class="form-select">
+                <option *ngFor="let category of categories" [value]="category._id">
+                  {{ category.name }}
+                </option>
+              </select>
+            </div>
+                        <div class="mb-3">
+              <label for="editImg" class="form-label">Hình ảnh (chọn lại nếu cần)</label>
+              <input type="file" id="editImg" name="img" (change)="onEditFileSelect($event)" class="form-control">
+              <img *ngIf="editImagePreview|| selectedEditFile" [src]="editImagePreview" alt="Preview" style="max-width: 150px; max-height: 150px" />
+              <button type="button" class="btn btn-warning btn-sm mt-2" (click)="removeEditMainImage()">Xóa ảnh</button>
+
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Mô tả</label>
+              <editor
+                formControlName="description"
+                [apiKey]="'0cl1kuehp4s9or9e85fdkffpj3sanw9kmkeu2gyq8gyau1g0'"
+                [init]="{
+                                height: 500,
+                                menubar: false,
+                                plugins: [
+                                    'advlist autolink lists link image charmap print preview anchor',
+                                    'searchreplace visualblocks code fullscreen',
+                                    'insertdatetime media table paste help wordcount',
+                                    'formatpainter',
+                                    'quickbars',
+                                    'code',
+                                    'preview',
+                                    'wordcount',
+                                    'accordion',
+                                    'table',
+                                    'fontfamily',
+                                    'fontsize',
+                                    'colorpicker',
+                                    'textcolor'
+                                ],
+                                toolbar:
+                                    'undo redo | styleselect | formatselect | fontfamily fontsize | ' +
+                                    'bold italic underline strikethrough | forecolor backcolor | ' +
+                                    'alignleft aligncenter alignright alignjustify | ' +
+                                    'bullist numlist outdent indent | ' +
+                                    'link image table | fullscreen preview code | help',
+                                block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Preformatted=pre',
+                                font_family_formats: 'Arial=arial,helvetica,sans-serif;Times New Roman=times new roman,times,serif;Custom Font=custom-font,sans-serif;',
+                                font_size_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt 48pt'
+                                }"
+              ></editor>
+              <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="text-danger">
+                Mô tả sản phẩm là bắt buộc.
+              </div>
+            </div>
+
+
+            <div formArrayName="variants">
+              <div *ngFor="let variant of editVariants.controls; let i = index" [formGroupName]="i" class="border p-3 mb-3 rounded">
+                <div class="row g-2 align-items-center">
+                  <div class="col-md-2">
+                    <label class="form-label">Size</label>
+                    <input type="text" formControlName="size" class="form-control" placeholder="Size" />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Màu sắc</label>
+                    <input type="text" formControlName="color" class="form-control" placeholder="Color" />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Giá gốc</label>
+                    <input type="number" formControlName="cost_price" class="form-control" min="0" />
+                    <div *ngIf="variant.get('cost_price')?.errors?.['min'] && variant.get('cost_price')?.touched" style="color: red;">
+                      Giá gốc không được nhỏ hơn 0
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Giá giảm</label>
+                    <input type="number" formControlName="sale_price" class="form-control" min="0" />
+                    <div *ngIf="variant.get('sale_price')?.errors?.['min'] && variant.get('sale_price')?.touched" style="color: red;">
+                      Giá giảm không được nhỏ hơn 0
+                    </div>
+                    <div *ngIf="variant.touched && variant.errors?.['invalidPrice']" class="text-danger">
+                      {{ variant.errors?.['invalidPrice'] }}
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Tồn kho</label>
+                    <input type="number" formControlName="stock" class="form-control" min="0" />
+                    <div *ngIf="variant.get('stock')?.errors?.['min'] && variant.get('stock')?.touched" style="color: red;">
+                      Tồn kho không được nhỏ hơn 0
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label">Ảnh biến thể</label>
+                    <input type="file" (change)="onEditVariantImageSelect($event, i)" class="form-control" />
+                    <div *ngIf="editVariantImagePreviews[i]" class="mt-2">
+                      <img [src]="editVariantImagePreviews[i]" alt="Preview" class="img-thumbnail" style="max-width: 130px; height: 120px;" />
+
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn btn-danger btn-sm mt-2" (click)="removeEditVariant(i)">
+                    Xóa
+                  </button>
+
+                </div>
+
+              </div>
+              <button (click)="addEditVariant()" type="button" class="btn btn-secondary">
+                Thêm biến thể
+              </button>
+
+            </div>
+
+
+            <button type="submit" class="btn btn-primary mt-3">Cập nhật sản phẩm</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index: 1040;" *ngIf="isDetailModalOpen"></div>
+  <div class="modal" tabindex="-1" [ngClass]="{ 'show': isDetailModalOpen }" style="display: block;" *ngIf="isDetailModalOpen">
+    <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Chi Tiết Sản Phẩm</h5>
+          <button type="button" class="btn-close" (click)="closeModal()">x</button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex flex-column flex-md-row align-items-center mb-3">
+           
+            <div>
+              <h5>{{ selectedProduct?.name }}</h5>
+               <div class="me-3 mb-3 mb-md-0">
+              <img [src]="imageBaseUrl + selectedProduct?.images_main" alt="Hình ảnh chính" class="img-thumbnail" style="max-width: 100%; height: 100px; object-fit: contain; width: 100px;">
+            </div>
+              <p><strong>Danh mục:</strong> {{ selectedProduct?.categoryId?.name }}</p>
+              <p><strong>Thương hiệu:</strong> {{ selectedProduct?.brand.name }}</p>
+              <p><strong>Mô tả:</strong> <span [innerHTML]="selectedProduct?.description"></span></p>
+            </div>
+          </div>
+
+          <h6 class="mt-3">Danh sách Variants:</h6>
+          <div class="table-responsive">
+            <table class="table table-bordered mt-2">
+              <thead>
+                <tr>
+                  <th>Size</th>
+                  <th>Ảnh</th>
+                  <th>Màu sắc</th>
+                  <th>Giá bán (VND)</th>
+                  <th>Giá giảm (VND)</th>
+                  <th>Số lượng kho</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let variant of sortedVariantsByColorAndSize">
+                  <td>{{ variant.size }}</td>
+                  <td><img [src]="imageBaseUrl + variant.image" alt="Hình ảnh" class="img-thumbnail" style="width: 50px;object-fit: contain; height: 50px;"></td>
+                  <td>{{ variant.color }}</td>
+                  <td>{{ variant.cost_price }}</td>
+                  <td>{{ variant.sale_price ? variant.sale_price.toLocaleString('vi-VN') : 'Chưa có giá' }}</td>
+                  <td>{{ variant.stock }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

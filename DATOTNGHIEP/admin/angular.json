@@ -1,0 +1,128 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "admin": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/admin",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "tsconfig.app.json",
+      "assets": [
+  {
+    "glob": "**/*",
+    "input": "src/assets",
+    "output": "assets/"
+  }
+],
+"styles": [
+  "node_modules/@angular/material/prebuilt-themes/azure-blue.css",
+  "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+  "src/assets/css/bootstrap.min.css",
+  "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+  "src/assets/plugins/fontawesome/css/fontawesome.min.css",
+  "src/assets/plugins/fontawesome/css/all.min.css",
+  "src/assets/css/animate.css",
+  "src/assets/plugins/select2/css/select2.min.css",
+  "src/assets/css/dataTables.bootstrap4.min.css",
+  "src/assets/css/style.css"
+],
+"scripts": [
+  "src/assets/js/jquery-3.6.0.min.js",
+  "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+  "src/assets/js/jquery.dataTables.min.js",
+  "src/assets/js/dataTables.bootstrap4.min.js",
+  "src/assets/plugins/select2/js/select2.min.js",
+  "src/assets/plugins/sweetalert/sweetalert2.all.min.js",
+  "src/assets/plugins/sweetalert/sweetalerts.min.js",
+  "src/assets/plugins/apexchart/apexcharts.min.js",
+  "src/assets/plugins/apexchart/chart-data.js",
+  "src/assets/js/feather.min.js",
+  "src/assets/js/jquery.slimscroll.min.js",
+  "src/assets/js/script.js" 
+]
+
+
+          },
+          "configurations": {
+            "production": {
+                "fileReplacements": [
+                  {
+                    "replace": "src/environments/environment.ts",
+                    "with": "src/environments/environment.prod.ts"
+                  }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "3MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "admin:build:production"
+            },
+            "development": {
+              "buildTarget": "admin:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}

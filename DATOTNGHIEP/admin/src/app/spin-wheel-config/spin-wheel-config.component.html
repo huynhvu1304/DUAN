@@ -1,0 +1,179 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">
+                        <i class="fas fa-cog text-primary"></i> 
+                        Cấu Hình Vòng Quay May Mắn
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-clock"></i> 
+                            Thời Gian Chờ Giữa Các Lần Quay
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div *ngIf="loading" class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Đang tải cấu hình...</p>
+                        </div>
+
+                        <div *ngIf="!loading && config" class="config-form">
+                            <!-- Thông tin hiện tại -->
+                            <div class="alert alert-info mb-4">
+                                <h6><i class="fas fa-info-circle"></i> Cấu hình hiện tại:</h6>
+                                <p class="mb-1"><strong>Thời gian chờ:</strong> {{ getCurrentCooldownText() }}</p>
+                                <p class="mb-1"><strong>Trạng thái:</strong> 
+                                    <span class="badge" [ngClass]="config.isActive ? 'bg-success' : 'bg-danger'">
+                                        {{ config.isActive ? 'Đang hoạt động' : 'Tạm dừng' }}
+                                    </span>
+                                </p>
+                                <p class="mb-0"><strong>Mô tả:</strong> {{ config.description }}</p>
+                            </div>
+
+                            <!-- Form cấu hình -->
+                            <form (ngSubmit)="saveConfig()">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Thời gian chờ <span class="text-danger">*</span></label>
+                                            <input 
+                                                type="number" 
+                                                class="form-control" 
+                                                [(ngModel)]="formData.cooldownValue" 
+                                                name="cooldownValue"
+                                                min="1" 
+                                                step="1"
+                                                placeholder="Nhập thời gian chờ">
+                                            <small class="form-text text-muted">
+                                                Thời gian người dùng phải chờ trước khi có thể quay lại
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Đơn vị thời gian <span class="text-danger">*</span></label>
+                                            <select 
+                                                class="form-select" 
+                                                [(ngModel)]="formData.cooldownUnit" 
+                                                name="cooldownUnit"
+                                                (change)="onUnitChange()">
+                                                <option *ngFor="let unit of timeUnits" [value]="unit.value">
+                                                    {{ unit.label }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Mô tả <span class="text-danger">*</span></label>
+                                            <textarea 
+                                                class="form-control" 
+                                                [(ngModel)]="formData.description" 
+                                                name="description"
+                                                rows="3" 
+                                                placeholder="Nhập mô tả cho cấu hình này"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <input 
+                                                    class="form-check-input" 
+                                                    type="checkbox" 
+                                                    [(ngModel)]="formData.isActive" 
+                                                    name="isActive"
+                                                    id="isActive">
+                                                <label class="form-check-label" for="isActive">
+                                                    Kích hoạt cấu hình này
+                                                </label>
+                                            </div>
+                                            <small class="form-text text-muted">
+                                                Khi tắt, hệ thống sẽ sử dụng cấu hình mặc định (24 giờ)
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button 
+                                            type="submit" 
+                                            class="btn btn-primary" 
+                                            [disabled]="saving">
+                                            <i class="fas fa-save" *ngIf="!saving"></i>
+                                            <span class="spinner-border spinner-border-sm me-2" *ngIf="saving"></span>
+                                            {{ saving ? 'Đang lưu...' : 'Lưu Cấu Hình' }}
+                                        </button>
+                                        <button 
+                                            type="button" 
+                                            class="btn btn-secondary ms-2" 
+                                            (click)="loadConfig()"
+                                            [disabled]="loading">
+                                            <i class="fas fa-refresh"></i> Làm Mới
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div *ngIf="!loading && !config" class="text-center py-4">
+                            <i class="fas fa-exclamation-triangle text-warning fa-3x mb-3"></i>
+                            <h5>Không tìm thấy cấu hình</h5>
+                            <p>Hệ thống sẽ tạo cấu hình mặc định khi bạn lưu lần đầu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-lightbulb"></i> 
+                            Hướng Dẫn
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            <h6><i class="fas fa-exclamation-triangle"></i> Lưu ý quan trọng:</h6>
+                            <ul class="mb-0">
+                                <li>Thời gian chờ được tính từ lần quay cuối cùng của người dùng</li>
+                                <li>Nếu đặt thời gian quá ngắn, có thể ảnh hưởng đến hiệu suất hệ thống</li>
+                                <li>Nếu đặt thời gian quá dài, có thể giảm trải nghiệm người dùng</li>
+                                <li>Khuyến nghị: 1-24 giờ cho trải nghiệm tốt nhất</li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <h6><i class="fas fa-info-circle"></i> Ví dụ cấu hình:</h6>
+                            <ul class="mb-0">
+                                <li><strong>30 giây:</strong> Cho phép quay lại ngay lập tức (test)</li>
+                                <li><strong>5 phút:</strong> Cho phép quay lại sau 5 phút</li>
+                                <li><strong>1 giờ:</strong> Cho phép quay lại sau 1 giờ</li>
+                                <li><strong>24 giờ:</strong> Cho phép quay lại sau 1 ngày</li>
+                                <li><strong>7 ngày:</strong> Cho phép quay lại sau 1 tuần</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,141 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/*  */
+table.mat-table {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.mat-elevation-z8 {
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.productimgname {
+  display: flex;
+  align-items: center;
+}
+
+.product-img img {
+  border-radius: 5px;
+}
+
+/*  */
+@media (max-width: 576px) {
+  .productimgname {
+    flex-direction: column;
+    align-items: start;
+  }
+  .product-img img {
+    width: 100px;
+    height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .modal-dialog {
+    max-width: 95% !important;
+    margin: auto;
+  }
+
+  .page-header, .page-btn {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .productimgname {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Trong file CSS/SCSS của component */
+
+/* Mặc định hiển thị tất cả các cột */
+/* Cần điều chỉnh displayedColumns trong TS để khớp */
+
+/* Ẩn các cột cụ thể trên màn hình nhỏ hơn 768px (ví dụ: điện thoại) */
+@media (max-width: 767.98px) {
+  /* Ẩn tiêu đề cột */
+  th.mat-header-cell.mat-column-category,
+  th.mat-header-cell.mat-column-brand,
+  th.mat-header-cell.mat-column-hot,
+  th.mat-header-cell.mat-column-purchases
+  {
+    display: none;
+  }
+
+  /* Ẩn ô dữ liệu */
+  td.mat-cell.mat-column-category,
+  td.mat-cell.mat-column-brand,
+  td.mat-cell.mat-column-hot,
+  td.mat-cell.mat-column-purchases
+  {
+    display: none;
+  }
+
+  /* Điều chỉnh độ rộng cột Ảnh và Tên Sản Phẩm */
+  th.mat-header-cell.mat-column-image,
+  td.mat-cell.mat-column-image {
+    width: 80px; /* Hoặc giá trị phù hợp */
+  }
+
+  th.mat-header-cell.mat-column-name,
+  td.mat-cell.mat-column-name {
+    flex-grow: 1; /* Cho phép cột tên mở rộng */
+  }
+
+  /* Đảm bảo các cột quan trọng khác hiển thị tốt */
+  th.mat-header-cell.mat-column-price,
+  td.mat-cell.mat-column-price,
+  th.mat-header-cell.mat-column-actions,
+  td.mat-cell.mat-column-actions {
+    min-width: unset; /* Hoặc đặt min-width cụ thể */
+    width: auto;
+  }
+}
+
+/* Thêm breakpoint cho tablet nếu cần */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  /* Điều chỉnh hiển thị cho tablet nếu cần */
+}

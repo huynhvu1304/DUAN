@@ -1,0 +1,82 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Danh sách người dùng</h4>
+                <h6>Quản lý người dùng</h6>
+            </div>
+        </div>
+      
+        <!-- Thông báo -->
+        <div class="alert alert-success" *ngIf="updateMessage">{{ updateMessage
+            }}</div>
+        <div class="alert alert-danger" *ngIf="updateError">{{ updateError
+            }}</div>
+
+        <!-- Bảng danh sách -->
+        <div class="card">
+            <div class="card-body">
+                <!-- Thanh tìm kiếm -->
+                <mat-form-field appearance="outline" class="w-100 mb-3">
+                    <mat-label>Tìm kiếm người dùng</mat-label>
+                    <input matInput 
+                           (keyup)="applyFilter($event)" 
+                           placeholder="Nhập ID, tên hoặc email...">
+                </mat-form-field>
+
+                <!-- Bảng danh sách hiện tại của bạn -->
+                <div class="table-responsive">
+                    <table class="table datanew">
+                        <thead>
+                            <tr>
+                                <th>STT</th>  <!-- Thêm cột ID -->
+                                <th>Ảnh đại diện</th>
+                                <th>Tên</th>
+                                <th>Email</th>
+                                <th>Vai trò</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Thay đổi từ users thành filteredUsers -->
+                            <tr *ngFor="let user of filteredUsers; let i = index">
+                                <td><small class="text-muted">{{i+1}}</small></td>
+                                <td class="productimgname">
+                                    <a class="product-img">
+                                      <img
+                                        [src]="user.img
+                                            ? (user.img.startsWith('http')
+                                                ? user.img
+                                                : imageBaseUrl + user.img)
+                                            : '/assets/img/default-user.png'"
+                                        [alt]="user.name"
+                                        (error)="onImgError($event)"
+                                        style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc; display: block;" />
+
+                                    </a>
+                                </td>
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.role}}</td>
+                                <td>
+                                    <select
+                                        class="form-control"
+                                        [value]="user.status"
+                                        (change)="updateStatus(user, $event)"
+                                        [ngClass]="{'text-success': user.status === 'hoạt động', 'text-danger': user.status === 'đã chặn'}">
+                                        <option
+                                            *ngFor="let status of statusOptions"
+                                            [value]="status"
+                                            [selected]="user.status === status">
+                                            {{status}}
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

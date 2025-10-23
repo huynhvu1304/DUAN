@@ -1,0 +1,83 @@
+
+<div class="login-container">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo-container">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <h2 class="login-title">Đăng nhập</h2>
+      <p class="login-subtitle">Vui lòng đăng nhập để tiếp tục</p>
+    </div>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email" class="form-label">
+          <i class="fas fa-envelope"></i>
+          Email
+        </label>
+        <div class="input-container">
+          <input 
+            type="email" 
+            class="form-input" 
+            id="email" 
+            placeholder="Nhập email của bạn" 
+            formControlName="email"
+            [class.error]="loginForm.get('email')!.invalid && loginForm.get('email')!.touched"
+          >
+          <div class="input-focus-border"></div>
+        </div>
+        <div *ngIf="loginForm.get('email')!.invalid && loginForm.get('email')!.touched" class="error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <span *ngIf="loginForm.get('email')!.errors?.['required']">Email không được để trống</span>
+          <span *ngIf="loginForm.get('email')!.errors?.['email']">Email không hợp lệ</span>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password" class="form-label">
+          <i class="fas fa-lock"></i>
+          Mật khẩu
+        </label>
+        <div class="input-container">
+          <input 
+            type="password" 
+            class="form-input" 
+            id="password" 
+            placeholder="Nhập mật khẩu của bạn" 
+            formControlName="password"
+            [class.error]="loginForm.get('password')!.invalid && loginForm.get('password')!.touched"
+          >
+          <div class="input-focus-border"></div>
+        </div>
+        <div *ngIf="loginForm.get('password')!.invalid && loginForm.get('password')!.touched" class="error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <span *ngIf="loginForm.get('password')!.errors?.['required']">Mật khẩu không được để trống</span>
+          <span *ngIf="loginForm.get('password')!.errors?.['minlength']">Mật khẩu phải có ít nhất 6 ký tự</span>
+        </div>
+      </div>
+      
+      <button 
+        type="submit" 
+        class="login-button" 
+        [disabled]="loginForm.invalid"
+        [class.loading]="isLoading"
+      >
+        <span *ngIf="!isLoading">
+          <i class="fas fa-sign-in-alt"></i>
+          Đăng nhập
+        </span>
+        <span *ngIf="isLoading" class="loading-spinner">
+          <i class="fas fa-spinner fa-spin"></i>
+          Đang xử lý...
+        </span>
+      </button>
+      
+      <div *ngIf="errorMessage" class="error-alert">
+        <i class="fas fa-times-circle"></i>
+        {{ errorMessage }}
+      </div>
+    </form>
+    
+    
+  </div>
+</div>

@@ -1,0 +1,263 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="dh-filter-section">
+      <h1 class="dh-section-title">Bộ lọc</h1>
+      <div class="dh-filter-group">
+        <label class="dh-filter-label">
+          Trạng thái:
+          <select class="dh-filter-select" [(ngModel)]="filterStatus">
+            <option value="">Tất cả trạng thái</option>
+            <option value="pending">Đang chờ xác nhận</option>
+            <option value="confirmed">Đã xác nhận</option>
+            <option value="shipping">Đang giao hàng</option>
+            <option value="delivered">Đã giao</option>
+            <option value="cancelled">Đã hủy</option>
+          </select>
+        </label>
+        <label class="dh-filter-label">
+          Thanh toán:
+          <select class="dh-filter-select" [(ngModel)]="filterPayment">
+            <option value="">Tất cả thanh toán</option>
+            <option value="paid">Đã thanh toán</option>
+            <option value="unpaid">Chưa thanh toán</option>
+          </select>
+        </label>
+        <label class="dh-filter-label">
+          Từ ngày:
+          <input class="dh-filter-input" type="date" [(ngModel)]="filterDateFrom" />
+        </label>
+        <label class="dh-filter-label">
+          Đến ngày:
+          <input class="dh-filter-input" type="date" [(ngModel)]="filterDateTo" />
+        </label>
+        <label class="dh-filter-label">
+          Tìm kiếm:
+          <input
+            class="dh-filter-input"
+            type="text"
+            [ngModel]="searchText"
+            (ngModelChange)="onSearchTextChange($event)"
+            placeholder="Nhập tên người nhận hoặc mã đơn hàng..."
+          />
+        </label>
+        <button class="dh-filter-clear-btn" (click)="filterStatus='';filterPayment='';filterDateFrom='';filterDateTo='';searchText=''">Xóa lọc</button>
+      </div>
+
+      <div class="dh-revenue-box">
+        <h3 class="dh-revenue-title">Tổng doanh thu:</h3>
+        <p class="dh-revenue-amount">{{ totalRevenue | currency:'VND':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+
+    <h1 class="dh-main-title">Danh sách đơn hàng</h1>
+
+    <div class="dh-table-wrapper">
+      <table class="dh-order-table">
+        <thead class="dh-table-thead">
+          <tr class="dh-table-row">
+            <th class="dh-table-header">STT</th>
+            <th class="dh-table-header">Tên khách hàng</th>
+            <th class="dh-table-header">Ngày đặt</th>
+            <th class="dh-table-header">Tổng tiền</th>
+            <th class="dh-table-header">Phương thức</th>
+            <th class="dh-table-header">Thanh toán</th>
+            <th class="dh-table-header">Trạng thái</th>
+            <th class="dh-table-header">Hành động</th>
+          </tr>
+        </thead>
+        <tbody class="dh-table-tbody">
+          <tr class="dh-table-row" *ngFor="let order of paginatedOrders; let i = index">
+            <td class="dh-table-data">{{ (currentPage - 1) * ordersPerPage + i + 1 }}</td>
+            <td class="dh-table-data">{{ order.receiverName || order.userId?.name || 'Không rõ' }}</td>
+            <td class="dh-table-data">{{ order.createdAt | date:'dd/MM/yyyy - HH:mm' }}</td>
+            <td class="dh-table-data">
+              <span class="dh-order-price">
+                {{ order.totalAmount | currency:'VND':'symbol':'1.0-0' }}
+              </span>
+            </td>
+            <td class="dh-table-data">{{ getPaymentMethod(order.payment?.method) }}</td>
+            <td class="dh-table-data">
+              <span 
+                class="dh-status-tag"
+                [ngClass]="{
+                  'dh-status-paid': order.payment?.status === 'paid',
+                  'dh-status-unpaid': order.payment?.status === 'unpaid' || order.payment?.status === 'failed',
+                  'dh-status-refunded': order.payment?.status === 'refunded',
+                  'dh-status-pending': order.payment?.status === 'pending'
+                }"
+              >
+                {{ getPaymentStatus(order.payment?.status, order) }}
+              </span>
+            </td>
+            <td class="dh-table-data">
+              <span class="dh-status-tag dh-status-{{ order.status }}">
+                {{ getVietnameseStatus(order.status) }}
+              </span>
+            </td>
+            <td class="dh-table-data">
+              <button class="btn btn-primary btn-sm" (click)="openDetail(order)">Xem chi tiết</button>
+            </td>
+          </tr>
+          <tr class="dh-table-row dh-no-data-row" *ngIf="paginatedOrders.length === 0">
+            <td class="dh-no-data-cell" colspan="8">Không tìm thấy đơn hàng nào.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dh-pagination-container">
+      <button class="dh-pagination-button" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Trước</button>
+      <button
+        class="dh-pagination-button"
+        *ngFor="let page of [].constructor(totalPages); let p = index"
+        (click)="changePage(p + 1)"
+        [class.dh-pagination-active]="currentPage === p + 1">
+        {{ p + 1 }}
+      </button>
+      <button class="dh-pagination-button" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Sau</button>
+    </div>
+
+    <div class="dh-modal-overlay" *ngIf="selectedOrder" (click)="closeDetail()"></div>
+    <div class="dh-modal" *ngIf="selectedOrder">
+      <div class="dh-modal-box">
+        <div class="dh-modal-header">
+          <h3 class="dh-modal-title">
+            Chi tiết đơn hàng:
+            <span class="dh-order-id">
+              #{{ selectedOrder?.orderCode }}
+              <i class="fa fa-copy dh-copy-icon"
+                 style="cursor:pointer; margin-left:6px;"
+                 title="Sao chép mã"
+                 (click)="copyOrderCode(selectedOrder?.orderCode)">
+              </i>
+            </span>
+          </h3>
+          <button class="dh-modal-close-btn" (click)="closeDetail()">×</button>
+        </div>
+
+        <div class="dh-modal-body">
+          <div class="dh-modal-info-grid">
+            <div class="dh-info-column">
+              <p class="dh-info-text"><strong class="dh-info-label">Người nhận:</strong> {{ selectedOrder.receiverName }}</p>
+              <p class="dh-info-text"><strong class="dh-info-label">SĐT:</strong> {{ selectedOrder.receiverPhone }}</p>
+              <p class="dh-info-text"><strong class="dh-info-label">Địa chỉ:</strong> {{ selectedOrder.receiverAddress }}</p>
+              <p class="dh-info-text"><strong class="dh-info-label">Phương thức thanh toán:</strong> {{ getPaymentMethod(selectedOrder.payment?.method) }}</p>
+              <ng-container *ngIf="selectedOrder.status === 'cancelled'">
+                <div class="dh-cancel-reason-box">
+                  <span class="dh-cancel-reason-label">Lý do hủy đơn:</span>
+                  <span class="dh-cancel-reason-content">
+                    {{ getCancelReasonLabel(selectedOrder.cancelReason) }}
+                    <span *ngIf="selectedOrder.cancelReason === 'other' && selectedOrder.cancelReasonText">
+                      - {{ selectedOrder.cancelReasonText }}
+                    </span>
+                  </span>
+                </div>
+              </ng-container>
+            </div>
+
+            <div class="dh-status-column">
+              <p class="dh-payment-status-text" [ngClass]="{
+                  'dh-text-success': selectedOrder?.payment?.status === 'paid',
+                  'dh-text-danger': selectedOrder?.payment?.status === 'unpaid'
+                }">
+                <strong class="dh-info-label dh-payment-label">Trạng thái thanh toán:</strong>
+                {{ getPaymentStatus(selectedOrder?.payment?.status) }}
+              </p>
+
+              <div class="dh-payment-action-area">
+                <ng-container *ngIf="selectedOrder?.status === 'cancelled'; else notCancelledPaymentAction">
+                  <div class="dh-cancelled-message dh-text-danger dh-italic">
+                    <i class="fa fa-ban dh-icon dh-mr-1"></i> Đơn hàng này đã bị hủy, không thể xác nhận thanh toán.
+                  </div>
+                </ng-container>
+
+                <ng-template #notCancelledPaymentAction>
+                  <button class="dh-btn dh-btn-success dh-payment-confirm-btn"
+                    *ngIf="
+                      selectedOrder?.payment?.status === 'unpaid' &&
+                      (
+                        (selectedOrder.payment.method === 'cod' && selectedOrder.status === 'delivered') ||
+                        selectedOrder.payment.method === 'vnpay'
+                      ) &&
+                      selectedOrder.status !== 'cancelled'
+                    "
+                    (click)="confirmPaymentUpdate(selectedOrder)">
+                    <i class="fa fa-check-circle dh-icon dh-mr-1"></i> Xác nhận đã thanh toán
+                  </button>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="dh-product-list-section">
+            <h4 class="dh-product-list-title">Sản phẩm</h4>
+            <div class="dh-product-item" *ngFor="let item of selectedOrder.items; let i = index">
+              <img class="dh-product-img" [src]="imageBaseUrl + item.variant?.image" alt="product" />
+              <div class="dh-product-info">
+                <p class="dh-product-name"><strong class="dh-info-label">{{ item.variant?.productName }}</strong></p>
+                <p class="dh-product-details">Size: {{ item.variant?.size }} | Màu: {{ item.variant?.color }}</p>
+                <p class="dh-product-quantity">Số lượng: {{ item.quantity }}</p>
+                <p class="dh-product-price">Giá: {{ item.price | currency:'VND':'symbol':'1.0-0' }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="dh-order-progress-container">
+            <div class="dh-progress-bar-filled" [ngStyle]="{ width: getProgressWidth() }"></div>
+            <div class="dh-progress-step" [class.dh-progress-active]="currentStep >= 1">
+              <div class="dh-step-circle">1</div>
+              <div class="dh-step-label">Đang chờ xác nhận</div>
+            </div>
+            <div class="dh-progress-step" [class.dh-progress-active]="currentStep >= 2">
+              <div class="dh-step-circle">2</div>
+              <div class="dh-step-label">Đã xác nhận</div>
+            </div>
+            <div class="dh-progress-step" [class.dh-progress-active]="currentStep >= 3">
+              <div class="dh-step-circle">3</div>
+              <div class="dh-step-label">Đang giao hàng</div>
+            </div>
+            <div class="dh-progress-step" [class.dh-progress-active]="currentStep >= 4">
+              <div class="dh-step-circle">4</div>
+              <div class="dh-step-label">Đã giao</div>
+            </div>
+          </div>
+
+          <div class="dh-action-buttons-group">
+            <button class="btn btn-primary dh-status-update-btn"
+              *ngIf="selectedOrder?.status !== 'cancelled' && currentStep < 4"
+              (click)="nextStep()">
+              Chuyển trạng thái
+            </button>
+
+            <button
+              class="dh-btn dh-btn-danger dh-cancel-order-btn"
+              *ngIf="selectedOrder?.status === 'pending' || selectedOrder?.status === 'confirmed'"
+              (click)="openCancelModal(selectedOrder._id)"
+            >
+              <i class="fa fa-times-circle dh-icon dh-mr-1"></i> Hủy đơn
+            </button>
+          </div>
+
+          <p class="dh-delivered-message dh-text-success dh-italic" *ngIf="currentStep === 4 && selectedOrder?.status !== 'cancelled'">
+            Đơn hàng này đã được giao thành công.
+          </p>
+
+          <p class="dh-cancelled-message dh-text-danger dh-italic" *ngIf="selectedOrder?.status === 'cancelled'">
+            Đơn hàng này đã bị hủy, không thể chuyển trạng thái.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal nhập lý do hủy -->
+    <div *ngIf="isCancelModalOpen" class="modal">
+      <div class="modal-content">
+        <h5>Nhập lý do hủy đơn</h5>
+        <textarea [(ngModel)]="cancelReasonText" rows="4" class="form-control"></textarea>
+        <button (click)="submitCancelOrder()">Xác nhận hủy</button>
+        <button (click)="closeCancelModal()">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

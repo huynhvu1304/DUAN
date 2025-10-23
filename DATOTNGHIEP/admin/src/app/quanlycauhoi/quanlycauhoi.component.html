@@ -1,0 +1,244 @@
+<!-- Overlay khi mở modal -->
+<div class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50" style="z-index: 1040;" *ngIf="showModal">
+</div>
+
+<!-- Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{ 'show': showModal }" style="display: block;" *ngIf="showModal">
+  <div class="modal-dialog" style="max-width: 95vw;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          Danh sách câu hỏi của {{ selectedUser?.name || 'Người dùng' }}
+        </h3>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="overflow-x: auto;">
+        <!-- Bộ lọc trạng thái -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Trạng thái hiển thị</label>
+            <select class="form-select"
+                    [(ngModel)]="visibilityFilter"
+                    (change)="setVisibilityFilter(visibilityFilter)">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="visible">Đang hiện</option>
+              <option value="hidden">Đang ẩn</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Trạng thái trả lời</label>
+            <select class="form-select"
+                    [(ngModel)]="statusFilter"
+                    (change)="setStatusFilter(statusFilter)">
+              <option value="all">Tất cả câu trả lời</option>
+              <option value="answered">Đã trả lời</option>
+              <option value="unanswered">Chưa trả lời</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table detail-table">
+            <thead>
+              <tr>
+                <th style="width:5%">STT</th>
+                <th style="width:10%; white-space: nowrap;">ID SP</th>
+                <th style="width:10%">Hình ảnh</th>
+                <th style="width:13%">Tên sản phẩm</th>
+                <th style="width:30%">Nội dung</th>
+                <th style="width:10%">Trạng thái</th>
+                <th style="width:22%">Thao tác</th>
+                <th class="text-center">Ẩn/Hiện</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let question of selectedUserQuestions, let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ question.product_id?._id || 'N/A' }}</td>
+                <td>
+                  <img *ngIf="question.product_id?.images_main" [src]="imageBaseUrl + question.product_id?.images_main"
+                    alt="Product Image" style="width:50px; height:auto;">
+                  <span *ngIf="!question.product_id?.images_main">N/A</span>
+                </td>
+                <td>{{ question.product_id?.name || 'Sản phẩm không rõ' }}</td>
+
+                <!-- Nội dung làm mờ khi ẩn -->
+                <td [class.opacity-50]="!question.isVisible">
+                  {{ question.content }}
+                </td>
+
+                <td>{{ question.status }}</td>
+
+                <td>
+                  <!-- Reply form -->
+                  <div *ngIf="replyFormVisible[question._id]">
+                    <textarea [(ngModel)]="replyTexts[question._id]" class="form-control mb-1" rows="2"
+                      placeholder="Nhập phản hồi..." [disabled]="!question.isVisible"></textarea>
+                    <button class="btn btn-primary btn-sm" (click)="submitReply(question)"
+                      [disabled]="question.isReplying || !question.isVisible">
+                      <span *ngIf="question.isReplying" class="spinner-border spinner-border-sm"></span>
+                      Gửi phản hồi
+                    </button>
+                    <button class="btn btn-secondary btn-sm ms-1" (click)="toggleReplyForm(question._id)"
+                      [disabled]="!question.isVisible">Hủy</button>
+                  </div>
+
+                  <button *ngIf="!replyFormVisible[question._id] && !question.replyContent"
+                    class="btn btn-outline-primary btn-sm" (click)="toggleReplyForm(question._id)"
+                    [disabled]="!question.isVisible">
+                    Trả lời
+                  </button>
+
+                  <!-- Hiển thị reply và nút chỉnh sửa -->
+                  <div *ngIf="question.replyContent && !editFormVisible[question._id]">
+                    <div class="alert alert-success p-2 mb-2 text-start reply-content">
+                      <b>Phản hồi:</b> {{ question.replyContent }}
+                    </div>
+                    <button class="btn btn-warning btn-sm" (click)="startEdit(question)"
+                      [disabled]="!question.isVisible">
+                      Chỉnh sửa
+                    </button>
+                  </div>
+
+                  <!-- Edit form -->
+                  <div *ngIf="editFormVisible[question._id]">
+                    <textarea [(ngModel)]="editTexts[question._id]" class="form-control mb-1" rows="2"
+                      placeholder="Nhập phản hồi..." [disabled]="!question.isVisible"></textarea>
+                    <button class="btn btn-success btn-sm" (click)="submitEdit(question)"
+                      [disabled]="question.isReplying || !question.isVisible">
+                      <span *ngIf="question.isReplying" class="spinner-border spinner-border-sm"></span>
+                      Lưu
+                    </button>
+                    <button class="btn btn-secondary btn-sm ms-1" (click)="cancelEdit(question)"
+                      [disabled]="!question.isVisible">Hủy</button>
+                  </div>
+                </td>
+
+                <td class="align-middle text-center">
+                  <label class="switch">
+                    <input type="checkbox" [checked]="question.isVisible" (change)="toggleQuestionVisible(question)">
+                    <span class="slider round"></span>
+                  </label>
+                  <span class="ms-1" [ngClass]="question.isVisible ? 'text-success' : 'text-danger'">
+                    {{ question.isVisible ? 'Hiện' : 'Ẩn' }}
+                  </span>
+                </td>
+              </tr>
+
+              <tr *ngIf="selectedUserQuestions.length === 0">
+                <td colspan="8" class="text-center text-muted">Chưa có câu hỏi nào từ người dùng này.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-end">
+        <button class="btn btn-secondary" (click)="closeModal()">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Phần ngoài modal -->
+<div class="page-wrapper">
+  <div class="content">
+    <div class="page-header">
+      <div class="page-title">
+        <h4>Quản Lý Câu Hỏi Theo Người Dùng</h4>
+        <h6>Xem và quản lý câu hỏi từ người dùng</h6>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex mb-3 gap-3">
+          <div style="flex: 1;">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Tìm kiếm người dùng</mat-label>
+              <input matInput [(ngModel)]="searchText" (keyup)="onSearchChange()"
+                placeholder="Nhập tên hoặc ID người dùng...">
+              <mat-icon matSuffix>search</mat-icon>
+              <mat-hint>Có thể tìm kiếm theo tên hoặc ID người dùng</mat-hint>
+            </mat-form-field>
+          </div>
+          <div style="width: 250px;">
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Lọc theo trạng thái</mat-label>
+    <mat-select [(ngModel)]="userStatusFilter" (selectionChange)="onUserStatusFilterChange()">
+      <mat-option value="all">Tất cả</mat-option>
+      <mat-option value="allowed">Cho phép đặt câu hỏi</mat-option>
+      <mat-option value="banned">Cấm đặt câu hỏi</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover text-center">
+            <thead>
+              <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">ID User</th>
+                <th class="text-center">Ảnh đại diện</th>
+                <th class="text-center">Tên người dùng</th>
+                <th class="text-center">Số câu hỏi</th>
+                <th class="text-center">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="pagedUsers.length > 0; else noUser">
+  <tr *ngFor="let user of pagedUsers; let i = index">
+    <td class="align-middle text-center">{{ pageIndex * pageSize + i + 1 }}</td>
+    <td class="align-middle text-center">{{ user.id }}</td>
+    <td class="align-middle text-center">
+      <img 
+        [src]="user.img 
+          ? (user.img.startsWith('http') 
+              ? user.img 
+              : imageUserBaseUrl + user.img) 
+          : '/assets/img/default-user.png'"
+        alt="Avatar"
+        class="rounded-circle" 
+        style="width:50px; height:50px; object-fit:cover;"
+        (error)="onAvatarError($event)" 
+      />
+    </td>
+    <td class="align-middle text-center">{{ user.name }}</td>
+    <td class="align-middle text-center">{{ user.questionCount }}</td>
+    <td class="align-middle text-center">
+      <button mat-icon-button (click)="openQuestionsModal(user)">
+        <i class="bi bi-eye"></i>
+      </button>
+      <button mat-icon-button (click)="toggleQuestionStatus(user.id)"
+        [matTooltip]="user.statusquestion === 'Cấm đặt câu hỏi' ? 'Cho phép đặt câu hỏi' : 'Cấm đặt câu hỏi'"
+        class="toggle-button">
+        <i class="bi" [ngClass]="{
+             'bi-slash-circle-fill text-danger': user.statusquestion === 'Cấm đặt câu hỏi',
+             'bi-check-circle-fill text-success': user.statusquestion === 'Cho phép đặt câu hỏi'
+           }" style="font-size: 20px">
+        </i>
+      </button>
+    </td>
+  </tr>
+</tbody>
+
+<ng-template #noUser>
+  <tbody>
+    <tr>
+      <td class="text-center" colspan="6">Không có người dùng nào có câu hỏi.</td>
+    </tr>
+  </tbody>
+</ng-template>
+          </table>
+        </div>
+
+        <!-- Thêm phân trang ở dưới cùng bảng -->
+        <mat-paginator [length]="filteredUsersWithQuestions.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+          (page)="onPageChange($event)">
+        </mat-paginator>
+
+      </div>
+    </div>
+  </div>
+</div>

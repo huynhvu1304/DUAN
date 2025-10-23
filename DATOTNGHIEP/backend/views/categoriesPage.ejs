@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+    <!--Hien thi danh sach san pham-->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(function(categories) { %>
+                <tr>
+                    <td><%= categories.id %></td>
+                    <td><%= categories.name %></td>
+                    <td><img src="/images/<%= categories.img %>" width="100px" height="100px"></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

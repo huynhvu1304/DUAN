@@ -1,0 +1,260 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="page-header">
+      <div class="page-title">
+        <h4>Quản Lý Khuyến Mãi</h4>
+        <!-- <h6>Xem và quản lý các chương trình khuyến mãi</h6> -->
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <!-- Nút tạo khuyến mãi -->
+        <div class="mb-3 text-end">
+          <button class="btn btn-success" (click)="openCreateModal()">
+            <i class="bi bi-plus-circle"></i> Tạo khuyến mãi
+          </button>
+        </div>
+
+        <!-- Bảng danh sách khuyến mãi -->
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên chương trình</th>
+                <th>Số lượng sản phẩm</th>
+                <th>Giảm giá (%)</th>
+                <th>Bắt đầu</th>
+                <th>Kết thúc</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let fs of flashSales; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ fs.name }}</td>
+                <td>{{ fs.products.length }}</td>
+                <td>{{ fs.discount_value }}</td>
+                <td>{{ fs.start_time | date:'HH:mm dd/MM/yyyy' }}</td>
+                <td>{{ fs.end_time | date:'HH:mm dd/MM/yyyy' }}</td>
+                <td>
+                  <span
+                    [ngClass]="{
+                      'text-success': fs.status === 'Đang diễn ra',
+                      'text-danger': fs.status === 'Đã kết thúc'
+                    }"
+                    >{{ fs.status }}</span
+                  >
+                </td>
+                <td>
+                  <!-- Thao tác -->
+                  <button class="btn btn-sm btn-primary me-1" (click)="editKhuyenMai(fs)">
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteKhuyenMai(fs._id)">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal tạo/sửa khuyến mãi -->
+<div
+  class="modal"
+  tabindex="-1"
+  [ngClass]="{ 'show': isModalOpen }"
+  style="display: block;"
+  *ngIf="isModalOpen"
+>
+  <!-- chỉnh modal rộng hơn -->
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          {{ isEdit ? 'Chỉnh sửa' : 'Tạo' }} khuyến mãi
+        </h3>
+        <button type="button" class="btn-close" (click)="closeModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+        <form class="row g-3">
+          <div class="col-md-12">
+            <label class="form-label">Tên chương trình</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="form.name"
+              name="name"
+            />
+          </div>
+
+          <div class="col-md-12">
+            <label class="form-label">Chọn sản phẩm áp dụng & số lượng</label>
+            <button type="button" class="btn btn-outline-primary btn-sm ms-2" (click)="openProductModal()">
+              Chọn sản phẩm
+            </button>
+            <div *ngFor="let p of form.products" class="d-flex align-items-center mb-2"> <ng-container *ngIf="getVariantById(p.variant_id) as prod; else loadingProduct"> <ng-container *ngIf="prod; else notFoundProduct"> <img *ngIf="prod.images_main" [src]="apiUrl + '/images/' + prod.images_main" width="32" class="me-2 rounded" style="object-fit:cover; height:32px;" /> <span class="fw-bold">{{ prod.productName }}</span> <span class="ms-2">- Size: {{ prod.size }} - Màu: {{ prod.color }}</span> </ng-container> <ng-template #notFoundProduct> <span class="text-danger">Không tìm thấy sản phẩm</span> </ng-template> </ng-container> <ng-template #loadingProduct> <span>Đang tải...</span> </ng-template> <!-- Nút xoá căn phải --> <button class="btn btn-sm btn-outline-danger ms-auto" (click)="removeProductFromForm(p.variant_id)"> <i class="bi bi-x"></i> </button> </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Phần trăm giảm (%)</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="form.discount_value"
+              name="discount_value"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">Bắt đầu</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              [(ngModel)]="form.start_time"
+              name="start_time"
+              [min]="todayString"
+              (change)="onStartDateChange()"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Kết thúc</label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              [(ngModel)]="form.end_time"
+              name="end_time"
+              [min]="form.start_time ? form.start_time : todayString"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Hủy</button>
+        <button class="btn btn-success" (click)="saveKhuyenMai()">
+          {{ isEdit ? 'Lưu' : 'Tạo mới' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"
+  style="z-index: 1040;"
+  *ngIf="isModalOpen"
+></div>
+
+<!-- Modal chọn sản phẩm -->
+<div
+  class="modal"
+  tabindex="-1"
+  [ngClass]="{ 'show': isProductModalOpen }"
+  style="display: block;"
+  *ngIf="isProductModalOpen"
+>
+  <div class="modal-dialog" style="max-width: 900px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-4">Chọn sản phẩm áp dụng</h5>
+        <button type="button" class="btn-close" (click)="closeProductModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-2 mb-3">
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Tìm kiếm tên, size, màu..." [(ngModel)]="productSearch" />
+          </div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="Giá từ" [(ngModel)]="filterPriceMin" min="0" />
+          </div>
+          <div class="col-md-2">
+            <input type="number" class="form-control" placeholder="Giá đến" [(ngModel)]="filterPriceMax" min="0" />
+          </div>
+          <div class="col-md-1">
+            <input type="number" class="form-control" placeholder="Tồn kho >=" [(ngModel)]="filterStockMin" min="0" />
+          </div>
+          <div class="col-md-3">
+            <select class="form-select" [(ngModel)]="filterBrand">
+              <option value="">-- Tất cả thương hiệu --</option>
+              <option *ngFor="let brand of brandList" [value]="brand._id">{{ brand.name }}</option>
+            </select>
+          </div>
+        </div>
+        <div style="overflow-x: auto; max-height: 350px; overflow-y: auto;">
+          <table class="table table-bordered table-hover align-middle" style="min-width: 800px;">
+            <thead class="table-light">
+              <tr>
+                <th style="width: 40px;"></th>
+                <th style="min-width: 180px;">Tên sản phẩm</th>
+                <th style="width: 60px;">Size</th>
+                <th style="width: 80px;">Màu</th>
+                <th style="width: 100px;">Giá gốc</th>
+                <th style="width: 100px;">Giá sale</th>
+                <th style="width: 80px;">Tồn kho</th>
+                <th style="width: 110px;">Số lượng áp dụng</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sp of filteredSanPhamList()">
+                <td class="text-center">
+                  <input type="checkbox"
+                    [checked]="isProductChecked(sp._id)"
+                    (change)="onProductCheckboxChange($event, sp._id)"
+                    style="transform: scale(1.2);"
+                  />
+                </td>
+                <td>
+                  <img *ngIf="sp.images_main" [src]="apiUrl + '/images/' + sp.images_main" width="40" class="me-2 rounded" style="object-fit:cover; height:40px;" />
+                  <span class="fw-bold">{{ sp.productName }}</span>
+                </td>
+                <td class="text-center">{{ sp.size }}</td>
+                <td class="text-center">{{ sp.color }}</td>
+                <td class="text-end">{{ sp.cost_price | number }} đ</td>
+                <td class="text-end">{{ sp.sale_price | number }} đ</td>
+                <td class="text-center">{{ sp.stock }}</td>
+                <td>
+                  <input
+                    type="number"
+                    min="1"
+                    [max]="sp.stock"
+                    class="form-control"
+                    style="width: 90px; font-size: 1rem;"
+                    [disabled]="!isProductChecked(sp._id)"
+                    [ngModel]="getProductQuantity(sp._id)"
+                    (ngModelChange)="setProductQuantity(sp._id, $event)"
+                    (blur)="onQuantityBlur(sp._id)"
+                    [attr.data-variant]="sp._id"
+                  />
+                  <div *ngIf="invalidQuantityVariants.includes(sp._id)" class="text-danger small">
+                    Số lượng phải lớn hơn 0
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeProductModal()">Đóng</button>
+        <button class="btn btn-success" (click)="closeProductModal()">Xong</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50"
+  style="z-index: 1040;"
+  *ngIf="isProductModalOpen"
+></div>

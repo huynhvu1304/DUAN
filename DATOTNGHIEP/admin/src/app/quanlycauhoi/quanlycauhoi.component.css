@@ -1,0 +1,104 @@
+.toggle-button {
+  transition: all 0.3s ease;
+}
+
+.toggle-button i {
+  transition: all 0.3s ease;
+}
+
+.bi-slash-circle-fill {
+  color: #dc3545;
+  opacity: 0.9;
+}
+
+.bi-check-circle-fill {
+  color: #198754;
+  opacity: 0.9;
+}
+
+.toggle-button:hover .bi-slash-circle-fill {
+  transform: scale(1.2);
+  opacity: 1;
+  color: #ff4444;
+}
+
+.toggle-button:hover .bi-check-circle-fill {
+  transform: scale(1.2);
+  opacity: 1;
+  color: #00C851;
+}
+
+/* Thêm vào quanlycauhoi.component.css nếu cần */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 22px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px; width: 18px;
+  left: 2px; bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #4caf50;
+}
+input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+.reply-box {
+  border-left: 4px solid #28a745; /* viền màu xanh lá */
+  border-radius: 10px;
+  padding: 12px 15px;
+  background: #f8fff8;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.reply-box:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.reply-box.reply-hidden {
+  opacity: 0.6;
+  filter: grayscale(30%);
+}
+
+.reply-header {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #155724;
+}
+
+.reply-content {
+  max-width: 350px;      /* hoặc giá trị phù hợp với giao diện của bạn */
+  word-break: break-word;
+  white-space: pre-line; /* giữ xuống dòng nếu có */
+}
+
+.reply-actions {
+  display: flex;
+  gap: 8px;
+}
+.fixed-btn {
+  width: 80px;   /* Chiều rộng cố định */
+  height: 36px;  /* Chiều cao cố định */
+  font-size: 14px; /* Kích thước chữ */
+  text-align: center;
+  line-height: 1.2;
+}

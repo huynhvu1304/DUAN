@@ -1,0 +1,82 @@
+.text-success {
+  color: #198754;
+  background-color: #d1e7dd;
+}
+
+.text-danger {
+  color: #dc3545;
+  background-color: #f8d7da;
+}
+
+select.form-control {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  width: 120px;
+}
+
+/* Thêm style cho thanh tìm kiếm */
+.mat-form-field {
+  width: 100%;
+}
+
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-field {
+  margin-bottom: 1rem;
+}
+
+/* Style cho input */
+::ng-deep .mat-form-field-outline {
+  background-color: white;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+::ng-deep .mat-form-field-flex {
+  padding: 0 0.75em;
+}
+
+.text-muted {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+td small.text-muted {
+  display: block;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Add these styles for the modal table tbody */
+.modal .table tbody {
+  max-height: 400px;
+  overflow-y: auto;
+  display: block;
+}
+
+.modal .table tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.modal .table tbody td {
+  padding: 12px 8px;
+  vertical-align: middle;
+  word-wrap: break-word;
+}
+
+/* Column widths */
+.modal .table tbody td:nth-child(1) { width: 5%; }  /* STT */
+.modal .table tbody td:nth-child(2) { width: 15%; } /* ID */
+.modal .table tbody td:nth-child(3) { width: 15%; } /* Người dùng */
+.modal .table tbody td:nth-child(4) { width: 30%; } /* Nội dung */
+.modal .table tbody td:nth-child(5) { width: 15%; } /* Đánh giá */
+.modal .table tbody td:nth-child(6) { width: 12%; } /* Ngày tạo */
+.modal .table tbody td:nth-child(7) { width: 8%; }  /* Thao tác */

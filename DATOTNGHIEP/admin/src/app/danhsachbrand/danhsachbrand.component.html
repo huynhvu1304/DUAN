@@ -1,0 +1,252 @@
+<!-- Show Brand -->
+<div class="main-wrapper">
+  <div class="page-wrapper">
+    <div class="content">
+      <div class="page-header">
+        <div class="page-title">
+          <h4>Brand List</h4>
+          <h6>View and manage your brands</h6>
+        </div>
+        <div class="page-btn">
+          <button class="btn btn-added" (click)="openAddModal()">
+            <img src="assets/img/icons/plus.svg" alt="img" class="me-1" />Thêm
+            Thương Hiệu Mới
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <!-- Search -->
+          <mat-form-field appearance="outline" class="w-100 mb-3">
+            <mat-label>Tìm kiếm thương hiệu</mat-label>
+            <input
+              matInput
+              (keyup)="applyFilter($event)"
+              placeholder="Nhập tên thương hiệu..."
+            />
+          </mat-form-field>
+
+          <!-- Mat Table -->
+          <div class="table-responsive">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              matSort
+              class="mat-elevation-z8 w-100"
+            >
+              <!-- STT -->
+              <ng-container matColumnDef="stt">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>STT</th>
+                <td mat-cell *matCellDef="let row; let i = index">
+                  {{ i + 1 }}
+                </td>
+              </ng-container>
+
+              <!-- Tên thương hiệu -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  Tên thương hiệu
+                </th>
+                <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+              </ng-container>
+
+              <!-- Hình ảnh -->
+              <ng-container matColumnDef="image_logo">
+                <th mat-header-cell *matHeaderCellDef>Hình ảnh</th>
+                <td mat-cell *matCellDef="let row">
+                  <img
+                    [src]="imageBaseUrl + row.image_logo"
+                    alt="Logo"
+                    style="max-width: 100px"
+                  />
+                </td>
+              </ng-container>
+
+              <!-- Hành động -->
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Hành động</th>
+                <td mat-cell *matCellDef="let row">
+                  <button class="btn me-2" (click)="openEditModal(row)">
+                    <img src="assets/img/icons/edit.svg" alt="edit" />
+                  </button>
+                  <button class="btn" (click)="deleteBrand(row._id)">
+                    <img src="assets/img/icons/delete.svg" alt="delete" />
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+
+          <!-- Paginator -->
+          <mat-paginator
+            [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons
+          ></mat-paginator>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Add Brand -->
+    <div
+      class="modal fade show"
+      tabindex="-1"
+      style="display: block; background-color: rgba(0, 0, 0, 0.5)"
+      *ngIf="isAddModalOpen"
+      aria-modal="true"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form [formGroup]="brandForm" (ngSubmit)="addBrand()">
+            <div class="modal-header">
+              <h5 class="modal-title">Thêm Thương Hiệu Mới</h5>
+              <button
+                type="button"
+                class="btn-close"
+                aria-label="Close"
+                (click)="closeAddModal()"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="addBrandName" class="form-label"
+                  >Tên Thương Hiệu</label
+                >
+                <input
+                  id="addBrandName"
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="Nhập tên thương hiệu"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="addBrandImage" class="form-label"
+                  >Ảnh Thương Hiệu</label
+                >
+                <input
+                  id="addBrandImage"
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  class="form-control"
+                  accept="image/*"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-success"
+                [disabled]="!brandForm.valid || !selectedFile"
+              >
+                Thêm Mới
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closeAddModal()"
+              >
+                Hủy
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Edit Brand -->
+    <div
+      class="modal fade show"
+      tabindex="-1"
+      style="display: block; background-color: rgba(0, 0, 0, 0.5)"
+      *ngIf="isEditModalOpen"
+      aria-modal="true"
+      role="dialog"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form [formGroup]="editForm" (ngSubmit)="updateBrand()">
+            <div class="modal-header">
+              <h5 class="modal-title">Chỉnh Sửa Thương Hiệu</h5>
+              <button
+                type="button"
+                class="btn-close"
+                aria-label="Close"
+                (click)="closeEditModal()"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="editBrandName" class="form-label"
+                  >Tên Thương Hiệu</label
+                >
+                <input
+                  id="editBrandName"
+                  type="text"
+                  formControlName="name"
+                  class="form-control"
+                  placeholder="Nhập tên thương hiệu"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editBrandImage" class="form-label"
+                  >Ảnh Thương Hiệu</label
+                >
+                <input
+                  id="editBrandImage"
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  class="form-control"
+                  accept="image/*"
+                />
+                <div class="mt-2">
+                  <img
+                    *ngIf="editForm.get('image_logo')?.value && !selectedFile"
+                    [src]="imageBaseUrl + editForm.get('image_logo')?.value"
+                    alt="Current Image"
+                    class="img-thumbnail"
+                    style="max-width: 150px"
+                  />
+                  <div *ngIf="selectedFile" class="mt-2">
+                    <small class="text-success fw-semibold"
+                      >Ảnh mới sẽ được tải lên</small
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="!editForm.valid"
+              >
+                Cập Nhật
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closeEditModal()"
+              >
+                Hủy
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- add brand -->
+<!-- <div class="main-wrapper">
+  <div class="page-wrapper">
+
+  </div>
+</div> -->

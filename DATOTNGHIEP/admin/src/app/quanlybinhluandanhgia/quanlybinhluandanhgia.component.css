@@ -1,0 +1,419 @@
+.page-wrapper {
+  padding: 20px;
+    margin-top: 80px;
+}
+
+.card,
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.table-responsive {
+  margin-top: 20px;
+  position: relative;
+}
+.mat-mdc-row{
+ 
+ margin: 5px;
+}
+.mat-mdc-row:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.rating-stars {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  color: #ffc107;
+  margin-left: -15px;
+}
+
+.rating-stars i {
+  font-size: 14px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.bi-star-fill {
+  color: #ffc107;
+}
+
+.bi-star {
+  color: #e4e5e9;
+}
+
+td .rating-stars {
+  min-width: 80px;
+}
+
+/* Căn giữa cho bảng chính */
+.mat-mdc-table {
+  width: 100%;
+}
+
+.mat-mdc-header-cell,
+.mat-mdc-cell {
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 12px !important;
+}
+
+/* Căn trái riêng cho cột thông tin sản phẩm */
+.product-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+/* Căn giữa cho bảng chi tiết */
+.detail-table th,
+.detail-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px;
+}
+
+/* Căn trái riêng cho cột nội dung trong bảng chi tiết */
+.detail-table td:nth-child(3) {
+  text-align: left;
+}
+
+/* Căn giữa rating stars */
+.rating-stars,
+.stars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* Căn giữa các button thao tác */
+.action-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.action-button {
+  color: #007bff;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  color: #0056b3;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.stars {
+  color: #ffc107;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* Style chung cho card và modal */
+.card,
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Header style */
+.modal-header {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Body style */
+.modal-body {
+  padding: 20px;
+  max-height: calc(100vh - 200px); /* Trừ đi phần header và margin */
+  overflow-y: auto;
+}
+
+/* Table trong modal */
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.detail-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  padding: 12px;
+  border: 1px solid #dee2e6;
+}
+
+.detail-table td {
+  padding: 12px;
+  border: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+/* Button style */
+.modal-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c757d;
+}
+
+.modal-header button:hover {
+  color: #dc3545;
+}
+
+/* Style cho user info trong modal */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Rating stars style */
+.stars {
+  color: #ffc107;
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* Thêm vào file .css của component */
+.modal {
+  z-index: 1050;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.stars {
+  color: #ffc107;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.modal-dialog {
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem);
+  margin: 0.5rem auto;
+}
+
+@media (max-width: 768px) {
+  .modal-dialog {
+    max-width: 95%;
+    margin: auto;
+  }
+}
+
+.text-muted {
+  font-size: 0.875rem;
+  word-break: break-all;
+}
+
+td small.text-muted {
+  display: block;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-reply {
+  position: relative;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.admin-reply small {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* Style cho modal body có scroll */
+.modal-body {
+  max-height: calc(100vh - 200px); /* Trừ đi phần header và margin */
+  overflow-y: auto;
+}
+
+/* Style cho table header cố định */
+.table-responsive {
+  position: relative;
+}
+
+.table thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1;
+  border-top: none;
+}
+
+/* Thêm shadow cho header khi scroll */
+.table thead th::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: rgba(0,0,0,0.05);
+}
+
+/* Đảm bảo modal không vượt quá chiều cao màn hình */
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem);
+  margin: 0.5rem auto;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #333;
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  color: #0056b3 !important;
+}
+
+.input-group .btn-sm {
+  padding: 0.25rem 0.5rem;
+}
+/* Thêm vào file styles.css hoặc component css */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+}
+.switch input {display:none;}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px; width: 16px;
+  left: 2px; bottom: 2px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #4caf50;
+}
+input:checked + .slider:before {
+  transform: translateX(16px);
+}
+/* ...existing code... */
+.spin {
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+/* ...existing code... */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 22px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 22px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: #28a745; /* xanh khi bật */
+}
+input:checked + .slider:before {
+  transform: translateX(18px);
+}

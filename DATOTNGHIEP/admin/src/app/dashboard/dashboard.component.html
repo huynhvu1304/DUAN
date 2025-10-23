@@ -1,0 +1,211 @@
+<div class="page-wrapper">
+  <div class="content">
+    <div class="row">
+      <div *ngIf="loadingData" class="col-12 text-center">
+        <p class="text-primary">Đang tải dữ liệu dashboard...</p>
+      </div>
+      <div *ngIf="errorMessage" class="col-12 alert alert-danger text-center">
+        <p>{{ errorMessage }}</p>
+      </div>
+
+      <ng-container *ngIf="!loadingData && !errorMessage">
+        <div class="col-lg-3 col-sm-6 col-12 d-flex">
+          <div class="dash-count das3">
+            <div class="dash-counts">
+              <h4>
+                {{ totalRevenue | currency : "VND" : "symbol" : "1.0-0" }}
+              </h4>
+              <h5>Doanh thu</h5>
+            </div>
+            <div class="dash-imgs">
+              <i data-feather="dollar-sign"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-12 d-flex">
+          <div class="dash-count das1">
+            <div class="dash-counts">
+              <h4>{{ totalProducts | number }}</h4>
+              <h5>Sản phẩm</h5>
+            </div>
+            <div class="dash-imgs">
+              <i data-feather="package"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-12 d-flex">
+          <div class="dash-count das2">
+            <div class="dash-counts">
+              <h4>{{ totalOrders | number }}</h4>
+              <h5>Đơn hàng</h5>
+            </div>
+            <div class="dash-imgs">
+              <i data-feather="users"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-12 d-flex">
+          <div class="dash-count das2">
+            <div class="dash-counts">
+              <h4>{{ pendingOrdersCount | number }}</h4>
+              <h5>Đơn hàng chờ xử lý</h5>
+            </div>
+            <div class="dash-imgs">
+              <i data-feather="shopping-cart"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-12 d-flex mt-3">
+          <div class="dash-count">
+            <div class="dash-counts">
+              <h4>{{ totalUsers | number }}</h4>
+              <h5>Người dùng</h5>
+            </div>
+            <div class="dash-imgs">
+              <i data-feather="clock"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-sm-6 col-12 d-flex mt-3">
+          <div class="dash-count das1">
+            <div class="dash-counts">
+              <h4>{{ totalStock | number }}</h4>
+              <h5>Sản phẩm tồn kho</h5>
+            </div>
+            <div class="dash-imgs">
+              <i data-feather="archive"></i>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="row">
+
+
+<!-- doanh thu -->
+<div class="col-lg-6 col-md-12 ">
+  <div class="card shadow ">
+    <div class="card-header">
+      <h5 class="card-title">Doanh thu</h5>
+      <div class="d-flex justify-content-end align-items-center flex-wrap">
+        <!-- Nút 'Theo tháng' -->
+        <button class="btn btn-sm" [class.btn-primary]="currentRevenuePeriod === 'monthly'"
+          [class.btn-outline-primary]="currentRevenuePeriod !== 'monthly'"
+          (click)="getRevenueChart('monthly')">Theo tháng</button>
+        <!-- Nút 'Theo ngày' -->
+        <button class="btn btn-sm ms-2" [class.btn-primary]="currentRevenuePeriod === 'daily'"
+          [class.btn-outline-primary]="currentRevenuePeriod !== 'daily'"
+          (click)="getRevenueChart('daily')">Theo ngày</button>
+        
+      </div>
+    </div>
+    <div class="card-body">
+      <div echarts [options]="revenueChartOptions" [merge]="revenueChartOptions" class="echart-container"
+        style="height: 320px;"></div>
+    </div>
+  </div>
+</div>
+
+
+        <div class="col-lg-6 col-md-12">
+          <div class="card shadow">
+            <div class="card-header">
+              <h5 class="card-title">Tỷ lệ trạng thái đơn hàng</h5>
+            </div>
+            <div class="card-body">
+
+              <div echarts [options]="orderStatusPieChartOptions" [merge]="orderStatusPieChartOptions" class="echart-container"
+                style="height: 350px;"></div>
+            </div>
+          </div>
+        </div>
+
+<!-- đơn hàng -->
+   <div class="col-lg-12 col-md-12 mt-4">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h5 class="m-0 font-weight-bold text-primary">Đơn hàng gần đây</h5>
+        <a routerLink="/danhsachdonhang" class="btn btn-sm btn-outline-secondary">
+          Tất cả đơn hàng <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100">
+            <ng-container matColumnDef="orderId">
+              <th mat-header-cell *matHeaderCellDef> ID Đơn hàng </th>
+              <td mat-cell *matCellDef="let element"> {{element.orderCode}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="customerName">
+              <th mat-header-cell *matHeaderCellDef> Khách hàng </th>
+              <td mat-cell *matCellDef="let element"> {{ element.receiverName || element.userId?.name || 'Không rõ'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="totalAmount">
+              <th mat-header-cell *matHeaderCellDef> Tổng tiền </th>
+              <td mat-cell *matCellDef="let element"> {{element.totalAmount | currency:'VND':'symbol':'1.0-0'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+              <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="orderDate">
+              <th mat-header-cell *matHeaderCellDef> Ngày đặt hàng </th>
+              <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'short'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Hành động </th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-raised-button color="primary"
+                        *ngIf="element.status === 'pending'"
+                        (click)="confirmOrder(element)"
+                        class="me-2">
+                  Xác nhận
+                </button>
+                <a mat-button color="primary" [routerLink]="['/danhsachdonhang']" [queryParams]="{orderId: element._id}">
+                  Chi tiết
+                </a>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <div *ngIf="dataSource.length === 0 && !loadingData" class="text-center mt-3">
+          <p>Không có đơn hàng gần đây.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- bán chạy -->
+
+        <div class="col-lg-12 col-md-12 mt-4">
+          <div class="card shadow">
+            <div class="card-header">
+              <h5 class="card-title">Top 5 Sản phẩm bán chạy</h5>
+            </div>
+            <div class="card-body">
+              <div
+                echarts
+                [options]="topSellingProductsChartOptions"
+                [merge]="topSellingProductsChartOptions"
+                class="echart-container"
+                style="height: 250px"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,277 @@
+/* Styles cho các dropdown chung (user menu, mobile user menu) */
+.dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle img {
+  width: 24px;
+  height: 24px;
+  margin-top: 9px; /* Điều chỉnh nếu cần để căn chỉnh */
+}
+
+.badge {
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  margin-left: -5px;
+  margin-bottom: 10px;
+}
+
+.header-left .logo img {
+  width: 80px;
+  height: auto;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.header-left .logo-small img {
+  width: 60px;
+  height: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header-left .logo img {
+    width: 90px;
+  }
+  .header-left .logo-small img {
+    width: 32px;
+  }
+}
+
+/* Ẩn/hiện dropdown menu cho notification và user */
+/* Class 'show' được thêm bởi Angular [ngClass] */
+.dropdown-menu.notifications {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: -40px; /* Điều chỉnh vị trí tùy theo layout header */
+  background-color: white;
+  width: 350px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+.dropdown-menu.notifications.show {
+  display: block;
+}
+
+/* Tương tự cho user dropdown */
+.main-drop .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+}
+
+.main-drop .dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.main-drop label.dropdown-toggle {
+  cursor: pointer;
+}
+
+/* Các style khác cho nội dung dropdown */
+.topnav-dropdown-header,
+.topnav-dropdown-footer {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.topnav-dropdown-footer {
+  border-top: 1px solid #eee;
+  border-bottom: none;
+}
+
+.noti-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification-message {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.notification-message:hover {
+  background-color: #f9f9f9;
+}
+
+.media {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin-right: 10px;
+}
+
+.avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.media-body {
+  flex-grow: 1;
+}
+
+.noti-title {
+  font-weight: bold;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: #888;
+}
+
+.clear-noti {
+  float: right;
+  font-size: 12px;
+  color: #007bff;
+  cursor: pointer;
+}
+
+/* --- Styles cho Sidebar Menu --- */
+#sidebar-menu {
+  padding: 0px;
+  margin-top: 20px;
+}
+
+/* Màu nền xanh cho mục active (do routerLinkActive thêm vào thẻ a hoặc li) */
+.sidebar-menu ul li a.active {
+    background-color: #1b2950; /* Màu nền xanh bạn muốn */
+    color: #fff; /* Màu chữ */
+    border-radius: 0px; /* Hoặc 4px tùy thiết kế */
+}
+
+/* Cho LI cha của submenu khi nó active (do routerLinkActive thêm) */
+.sidebar-menu ul li.submenu.active > a {
+    background-color: #1b2950; /* Màu nền xanh cho mục cha khi có con active */
+    color: #fff;
+    border-radius: 0px;
+}
+
+/* Style cho hover của các mục menu */
+.sidebar-menu ul li > a:hover {
+    background: #1b2850; /* Hơi tối hơn màu active một chút hoặc giống hệt */
+    color: #fff;
+    border-radius: 0px;
+}
+/* Style cho hover của các mục con trong submenu */
+.sidebar-menu .submenu ul li a:hover {
+    background-color: #2a374a; /* Một màu nền khi hover cho các mục con trong submenu */
+    color: #FFFFFF;
+}
+
+
+/* *** QUAN TRỌNG: Điều khiển việc xổ/thu submenu *** */
+/* Lớp 'active-submenu-open' được thêm bởi [ngClass] trong HTML */
+.sidebar-menu .submenu > ul {
+  display: block; /* Mặc định là block để transition max-height hoạt động */
+  max-height: 0; /* Chiều cao ban đầu là 0 để ẩn */
+  overflow: hidden; /* Ẩn nội dung bị tràn */
+  transition: max-height 0.35s ease-out; /* Hiệu ứng đóng/mở mượt mà */
+  padding-left: 15px; /* Điều chỉnh thụt đầu dòng cho submenu */
+  list-style: none; /* Bỏ dấu chấm đầu dòng */
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #3a475a; /* Nền của submenu con, đảm bảo chữ sáng nổi bật */
+  border-radius:0px;
+}
+
+/* Khi submenu có class 'active-submenu-open', nó sẽ mở ra */
+.sidebar-menu .submenu.active-submenu-open > ul {
+  max-height: 500px; /* Đặt giá trị đủ lớn để chứa toàn bộ submenu */
+  /* Nếu nội dung submenu của bạn rất dài, hãy tăng giá trị này */
+}
+
+/* Optional: Xoay mũi tên khi submenu mở */
+.sidebar-menu .submenu a .menu-arrow {
+  transition: transform 0.35s ease-out;
+  display: inline-block;
+  /* Nếu bạn dùng flexbox cho thẻ a, có thể thêm margin-left: auto; để đẩy mũi tên sang phải */
+}
+
+.sidebar-menu .submenu.active-submenu-open a .menu-arrow {
+  transform: rotate(90deg); /* Xoay mũi tên khi menu mở */
+}
+
+/* --- Styles cho Mobile Sidebar và Mini-Sidebar --- */
+/* Các style này thường được định nghĩa trong file CSS framework hoặc file styles.css toàn cục */
+/* Nếu bạn cần các style này để main-wrapper dịch chuyển và sidebar hiện/ẩn, hãy đảm bảo chúng tồn tại */
+
+/* .main-wrapper.slide-nav (dịch chuyển nội dung chính sang phải khi sidebar mobile mở) */
+/* .sidebar.opened (hiển thị sidebar mobile, ví dụ: left: 0;) */
+/* html.menu-opened (ngăn cuộn trang chính khi mobile sidebar mở, vd: overflow: hidden;) */
+/* .sidebar.mini-sidebar (thu gọn sidebar trên desktop, vd: width: 60px;) */
+
+/* Overlay cho mobile sidebar */
+.main-wrapper.slide-nav .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Nền mờ */
+    z-index: 999; /* Đảm bảo nó nằm trên nội dung chính nhưng dưới sidebar */
+    display: none; /* Mặc định ẩn */
+}
+
+.main-wrapper.slide-nav .sidebar-overlay.opened {
+    display: block; /* Hiển thị khi sidebar mobile mở */
+}
+
+/* Style cho các link trong submenu con */
+.sidebar-menu .submenu ul li a {
+    display: block; /* Quan trọng: Đảm bảo link chiếm toàn bộ không gian và padding hoạt động */
+    color: #E0E0E0; /* Màu chữ rõ ràng, ví dụ: màu xám nhạt */
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 8px 15px 8px 35px; /* Thụt lề và padding */
+    text-decoration: none; /* Đảm bảo không có gạch chân */
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Style cho icon và text trong link chính (cả có và không có submenu) */
+.sidebar-menu li a img {
+    margin-right: 10px; /* Khoảng cách giữa icon và text */
+    vertical-align: middle; /* Căn chỉnh icon với text */
+}
+
+.sidebar-menu li a span {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.header-left {
+  display: flex;
+  align-items: center;    
+  justify-content: center; 
+  height: 80px;           
+}

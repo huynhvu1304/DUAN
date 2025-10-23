@@ -1,0 +1,91 @@
+<div id="global-loader">
+  <div class="whirly-loader"></div>
+</div>
+
+<div class="main-wrapper" [ngClass]="{'slide-nav': isMobileSidebarOpen}">
+  <div class="header">
+    <div class="header-left active">
+      <a routerLink="/" class="logo">
+        <img src="assets/img/logomobile.png" alt="Logo">
+      </a>
+      <a routerLink="/" class="logo-small">
+        <img src="assets/img/logomobile.png" alt="Logo Small">
+      </a>
+      </div>
+
+    <a id="mobile_btn" class="mobile_btn" (click)="toggleMobileSidebar()">
+      <span class="bar-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </a>
+
+    <ul class="nav user-menu">
+      <li class="nav-item dropdown has-arrow main-drop">
+        <input type="checkbox" id="user-menu-toggle" [(ngModel)]="isUserMenuOpen" hidden>
+        <label for="user-menu-toggle" class="dropdown-toggle nav-link userset">
+          <span class="user-img">
+            <i class="fa fa-sign-out" style="font-size: 24px; cursor: pointer;" (click)="logout()" title="Đăng xuất"></i>
+            <span class="status online"></span>
+          </span>
+        </label>
+      </li>
+    </ul>
+
+    <div class="dropdown mobile-user-menu">
+      <input type="checkbox" id="mobile-user-toggle" [(ngModel)]="isMobileUserMenuOpen" hidden>
+      <label for="mobile-user-toggle" class="nav-link dropdown-toggle">
+        <i class="fa fa-ellipsis-v"></i>
+      </label>
+      <div class="dropdown-menu dropdown-menu-right" [ngClass]="{'show': isMobileUserMenuOpen}">
+        <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar" id="sidebar" [ngClass]="{'opened': isMobileSidebarOpen, 'mini-sidebar': isMiniSidebar}">
+    <div class="sidebar-inner slimscroll">
+      <div id="sidebar-menu" class="sidebar-menu">
+        <ul>
+          <li>
+            <a [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <img src="assets/img/icons/dashboard.svg" alt="img"><span>Thống kê</span>
+            </a>
+          </li>
+
+              <li><a routerLink="/danhsachpro"routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><img src="assets/img/icons/product.svg" alt="img"><span>Quản lý sản phẩm</span></a></li>
+              <li><a routerLink="/danhsachdanhmuc"routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><img src="assets/img/icons/product.svg" alt="img"><span>Danh Sách Danh Mục</span></a></li>
+              <li><a routerLink="/brand"routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><img src="assets/img/icons/product.svg" alt="img"><span>Quản lý thương hiệu</span></a></li>
+
+          <li class="submenu" [ngClass]="{'active-submenu-open': menuStates['cmts']}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+            <a (click)="toggleMenu('cmts')"><img src="assets/img/icons/question.svg" alt="img"><span>Quản lý đánh giá</span> <span class="menu-arrow"></span></a>
+            <ul *ngIf="menuStates['cmts']">
+              <li><a routerLink="/quanlybinhluandanhgia" routerLinkActive="active">Theo sản phẩm </a></li>
+              <li><a routerLink="/quanlybinhluandanhgiatheouser" routerLinkActive="active">Theo người dùng</a></li>
+            </ul>
+          </li>
+          <li class="submenu" [ngClass]="{'active-submenu-open': menuStates['questions']}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+            <a (click)="toggleMenu('questions')"><img src="assets/img/icons/question.svg" alt="img"><span>Quản lý Câu Hỏi</span> <span class="menu-arrow"></span></a>
+            <ul *ngIf="menuStates['questions']">
+              <li><a routerLink="/quanlycauhoitheosp" routerLinkActive="active">Theo sản phẩm </a></li>
+              <li><a routerLink="/quanlycauhoi" routerLinkActive="active">Theo người dùng</a></li>
+            </ul>
+          </li>
+           <li>
+            <a routerLink="/danhsachdonhang" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><img src="assets/img/icons/sales1.svg" alt="img"><span>Đơn Hàng</span> </a>
+          </li>
+
+          <li>
+            <a routerLink="/danhsachnguoidung" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><img src="assets/img/icons/users1.svg" alt="img"><span>Người Dùng</span> </a>
+          </li>
+        <li><a routerLink="/quanlykhuyenmai"routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" ><img src="assets/img/icons/transfer1.svg" alt="img"><span>Quản lý khuyến mãi</span></a></li>
+        <li><a routerLink="/danhsachvoucher" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><img src="assets/img/icons/voucher.svg" alt="img"><span>Quản lý Voucher</span></a></li>
+        <li><a routerLink="/quanlyvongquay" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><img src="assets/img/icons/voucher.svg" alt="img"><span>Quản lý Vòng Quay</span></a></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

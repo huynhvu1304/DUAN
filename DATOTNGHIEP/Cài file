@@ -1,0 +1,23 @@
+- next/font/google
+ + npm install next@latest react@latest react-dom@latest
+
+- ngrok http 3000
+
+- Cài tailwind 3.4.17
+ Chạy cái này trước
+    + Remove-Item -Recurse -Force node_modules
+    + Remove-Item package-lock.json
+    + npm install
+ Sau đó
+    + npm install -D tailwindcss@3.4.17 postcss autoprefixer
+    + npx tailwindcss init -p
+
+- Lệnh cài react-toastify và import ToastContainer
+  Cài cửa sổ thông báo nếu chưa cài
+    + npm install react-toastify
+
+- Cài cửa sổ thông báo 
+    + npm i react-toastify
+
+- Cài nodemailer 
+    + npm install nodemailer dotenv

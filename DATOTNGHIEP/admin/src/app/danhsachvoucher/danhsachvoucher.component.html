@@ -1,0 +1,493 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Quản Lý Voucher</h3>
+                </div>
+                <div class="col-auto ms-auto">
+                    <button class="btn btn-outline-secondary me-2" (click)="openFilterModal()">
+                        <i class="fas fa-filter"></i> Tìm kiếm
+                    </button>
+                    <button class="btn btn-outline-info me-2" (click)="toggleShowDeleted()">
+                        <i class="fas fa-trash"></i> {{ showDeleted ? 'Ẩn đã xóa' : 'Hiện đã xóa' }}
+                    </button>
+                    <button class="btn btn-primary" (click)="openAddModal()">
+                        <i class="fas fa-plus"></i> Thêm Voucher
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spin Wheel Vouchers Summary -->
+        <div class="row mb-4" *ngIf="spinWheelVouchers.length > 0">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            <i class="fas fa-dharmachakra text-primary"></i> 
+                            Voucher Vòng Quay May Mắn
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3" *ngFor="let voucher of spinWheelVouchers">
+                                <div class="spin-wheel-voucher-card">
+                                    <div class="voucher-code">{{ voucher.code }}</div>
+                                    <div class="voucher-desc">{{ voucher.description }}</div>
+                                                                         <div class="voucher-weight">
+                                         <strong>Trọng số:</strong> {{ voucher.weight }}
+                                         <span class="probability">({{ calculateSpinWheelWinProbability(voucher) | number:'1.1-1' }}%)</span>
+                                     </div>
+                                    <div class="voucher-remaining">
+                                        Còn lại: {{ voucher.remaining }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã Voucher</th>
+                                        <th>Mô tả</th>
+                                        <th>Loại giảm giá</th>
+                                        <th>Giá trị giảm</th>
+                                        <th>Đơn tối thiểu</th>
+                                        <th>Vòng quay</th>
+                                        <th>Trọng số</th>
+                                        <th>Xác suất</th>
+                                        <th>Số lượng</th>
+                                        <th>Đã dùng</th>
+                                        <th>Ngày bắt đầu</th>
+                                        <th>Ngày kết thúc</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="loading">
+                                        <td colspan="14" class="text-center">
+                                            <div class="spinner-border" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let voucher of filteredVouchers" [class.table-danger]="voucher.isDeleted">
+                                        <td><strong>{{ voucher.code }}</strong></td>
+                                        <td>{{ voucher.description }}</td>
+                                        <td>
+                                            <span class="badge" [ngClass]="voucher.discountType === 'percent' ? 'bg-info' : 'bg-warning'">
+                                                {{ voucher.discountType === 'percent' ? 'Phần trăm' : 'Số tiền' }}
+                                            </span>
+                                        </td>
+                                        <td>{{ getDiscountText(voucher) }}</td>
+                                        <td>{{ formatCurrency(voucher.minOrderValue) }}</td>
+                                        <td>
+                                            <span *ngIf="voucher.isSpinWheelVoucher" class="badge bg-success">
+                                                <i class="fas fa-dharmachakra"></i> Có
+                                            </span>
+                                            <span *ngIf="!voucher.isSpinWheelVoucher" class="badge bg-secondary">
+                                                Không
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf="voucher.isSpinWheelVoucher && voucher.weight" class="badge bg-primary">
+                                                {{ voucher.weight }}
+                                            </span>
+                                            <span *ngIf="!voucher.isSpinWheelVoucher || !voucher.weight">-</span>
+                                        </td>
+                                        <td>
+                                            <span *ngIf="voucher.isSpinWheelVoucher && voucher.weight" class="probability-text">
+                                                {{ calculateWinProbability(voucher) | number:'1.1-1' }}%
+                                            </span>
+                                            <span *ngIf="!voucher.isSpinWheelVoucher || !voucher.weight">-</span>
+                                        </td>
+                                        <td>{{ voucher.quantity }}</td>
+                                        <td>{{ voucher.used }}</td>
+                                        <td>{{ formatDate(voucher.startDate) }}</td>
+                                        <td>{{ formatDate(voucher.endDate) }}</td>
+                                        <td>
+                                            <span class="badge" [ngClass]="{
+                                                'bg-success': getStatusClass(voucher) === 'active',
+                                                'bg-warning': getStatusClass(voucher) === 'pending',
+                                                'bg-danger': getStatusClass(voucher) === 'expired' || getStatusClass(voucher) === 'used',
+                                                'bg-secondary': getStatusClass(voucher) === 'inactive',
+                                                'bg-dark': getStatusClass(voucher) === 'deleted'
+                                            }">
+                                                {{ getStatusText(voucher) }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="actions">
+                                                <button class="btn btn-sm btn-outline-primary me-1" (click)="openEditModal(voucher)" [disabled]="voucher.isDeleted">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm" 
+                                                        [ngClass]="voucher.isDeleted ? 'btn-outline-success' : 'btn-outline-danger'"
+                                                        (click)="toggleDeleteVoucher(voucher)"
+                                                        [title]="voucher.isDeleted ? 'Khôi phục voucher' : 'Xóa voucher'">
+                                                    <i [class]="voucher.isDeleted ? 'fas fa-undo' : 'fas fa-trash'"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!loading && filteredVouchers.length === 0">
+                                        <td colspan="14" class="text-center">Không có voucher nào</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Modal -->
+<div class="modal fade" [class.show]="showFilterModal" [style.display]="showFilterModal ? 'block' : 'none'" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-filter"></i> Tìm kiếm và Lọc Voucher
+                </h5>
+                <button type="button" class="btn-close" (click)="closeFilterModal()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Mã voucher</label>
+                            <input type="text" class="form-control" [(ngModel)]="filter.code" placeholder="Nhập mã voucher...">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái</label>
+                            <select class="form-select" [(ngModel)]="filter.status">
+                                <option value="all">Tất cả</option>
+                                <option value="active">Đang hoạt động</option>
+                                <option value="inactive">Không hoạt động</option>
+                                <option value="expired">Đã hết hạn</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Từ ngày</label>
+                            <input type="datetime-local" class="form-control" [(ngModel)]="filter.startDate">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Đến ngày</label>
+                            <input type="datetime-local" class="form-control" [(ngModel)]="filter.endDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Voucher vòng quay</label>
+                            <select class="form-select" [(ngModel)]="filter.isSpinWheelVoucher">
+                                <option [ngValue]="undefined">Tất cả</option>
+                                <option [ngValue]="true">Có tham gia</option>
+                                <option [ngValue]="false">Không tham gia</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái xóa</label>
+                            <select class="form-select" [(ngModel)]="filter.isDeleted">
+                                <option [ngValue]="false">Chưa xóa</option>
+                                <option [ngValue]="true">Đã xóa</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="clearFilter()">
+                    <i class="fas fa-times"></i> Xóa bộ lọc
+                </button>
+                <button type="button" class="btn btn-primary" (click)="applyFilter()">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Modal -->
+<div class="modal fade" [class.show]="showAddModal" [style.display]="showAddModal ? 'block' : 'none'" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-plus"></i> Thêm Voucher Mới
+                </h5>
+         
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Mã voucher <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="newVoucher.code" placeholder="Nhập mã voucher">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="newVoucher.description" placeholder="Nhập mô tả">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Loại giảm giá <span class="text-danger">*</span></label>
+                            <select class="form-select" [(ngModel)]="newVoucher.discountType">
+                                <option value="percent">Phần trăm (%)</option>
+                                <option value="fixed">Số tiền (VNĐ)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Giá trị giảm <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" [(ngModel)]="newVoucher.discountValue" min="0">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Đơn tối thiểu</label>
+                            <input type="number" class="form-control" [(ngModel)]="newVoucher.minOrderValue" min="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="newVoucher.discountType === 'percent'">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Giảm tối đa (VNĐ)</label>
+                            <input type="number" class="form-control" [(ngModel)]="newVoucher.maxDiscountValue" min="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Số lượng <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" [(ngModel)]="newVoucher.quantity" min="1">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Ngày bắt đầu <span class="text-danger">*</span></label>
+                            <input type="datetime-local" class="form-control" [(ngModel)]="newVoucher.startDate" [min]="getTodayString()" (change)="onDateChange(newVoucher)">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Ngày kết thúc <span class="text-danger">*</span></label>
+                            <input type="datetime-local" class="form-control" [(ngModel)]="newVoucher.endDate" [min]="getMinEndDate(newVoucher.startDate)">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="newVoucher.isActive" id="isActive">
+                                <label class="form-check-label" for="isActive">
+                                    Kích hoạt voucher
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="newVoucher.isSpinWheelVoucher" id="isSpinWheel">
+                                <label class="form-check-label" for="isSpinWheel">
+                                    Tham gia vòng quay may mắn
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="newVoucher.isSpinWheelVoucher">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Trọng số <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" [(ngModel)]="newVoucher.weight" min="1" placeholder="Nhập trọng số (càng cao càng dễ trúng)">
+                            <small class="form-text text-muted">
+                                Trọng số càng cao thì xác suất trúng voucher này càng lớn
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeAddModal()">Hủy</button>
+                <button type="button" class="btn btn-primary" (click)="createVoucher()">
+                    <i class="fas fa-save"></i> Tạo Voucher
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade" [class.show]="showEditModal" [style.display]="showEditModal ? 'block' : 'none'" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-edit"></i> Chỉnh Sửa Voucher
+                </h5>
+            
+            </div>
+            <div class="modal-body" *ngIf="selectedVoucher">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Mã voucher <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="selectedVoucher.code" placeholder="Nhập mã voucher">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Mô tả <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" [(ngModel)]="selectedVoucher.description" placeholder="Nhập mô tả">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Loại giảm giá <span class="text-danger">*</span></label>
+                          <select class="form-select" [(ngModel)]="selectedVoucher.discountType"
+                            [disabled]="selectedVoucher.isNoPrize || selectedVoucher.code === 'NO_PRIZE'">
+                        <option value="percent">Phần trăm (%)</option>
+                        <option value="fixed">Số tiền (VNĐ)</option>
+                    </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Giá trị giảm <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" [(ngModel)]="selectedVoucher.discountValue"
+       min="0" [disabled]="selectedVoucher.isNoPrize || selectedVoucher.code === 'NO_PRIZE'">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Đơn tối thiểu</label>
+                           <input type="number" class="form-control" [(ngModel)]="selectedVoucher.minOrderValue"
+       min="0" [disabled]="selectedVoucher.isNoPrize || selectedVoucher.code === 'NO_PRIZE'">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="selectedVoucher.discountType === 'percent'">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Giảm tối đa (VNĐ)</label>
+                           <input type="number" class="form-control" [(ngModel)]="selectedVoucher.maxDiscountValue"
+       min="0" [disabled]="selectedVoucher.isNoPrize || selectedVoucher.code === 'NO_PRIZE'">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Số lượng <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" [(ngModel)]="selectedVoucher.quantity" min="1">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Ngày bắt đầu <span class="text-danger">*</span></label>
+                          <input 
+  type="datetime-local" 
+  class="form-control" 
+  [(ngModel)]="selectedVoucher.startDate" 
+  [min]="getMinDate(selectedVoucher.startDate)" 
+  (change)="onDateChange(selectedVoucher)"
+  [disabled]="selectedVoucher.isNoPrize"
+/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Ngày kết thúc <span class="text-danger">*</span></label>
+                           <input 
+  type="datetime-local" 
+  class="form-control" 
+  [(ngModel)]="selectedVoucher.endDate" 
+  [min]="getMinEndDate(selectedVoucher.startDate)"
+  [disabled]="selectedVoucher.isNoPrize"
+/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="selectedVoucher.isActive" id="editIsActive">
+                                <label class="form-check-label" for="editIsActive">
+                                    Kích hoạt voucher
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="selectedVoucher.isSpinWheelVoucher" id="editIsSpinWheel">
+                                <label class="form-check-label" for="editIsSpinWheel">
+                                    Tham gia vòng quay may mắn
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="selectedVoucher.isSpinWheelVoucher">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Trọng số <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" [(ngModel)]="selectedVoucher.weight" min="1" placeholder="Nhập trọng số (càng cao càng dễ trúng)">
+                            <small class="form-text text-muted">
+                                Trọng số càng cao thì xác suất trúng voucher này càng lớn
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Hủy</button>
+                <button type="button" class="btn btn-primary" (click)="updateVoucher()">
+                    <i class="fas fa-save"></i> Cập Nhật
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Backdrop -->
+<div class="modal-backdrop fade show" *ngIf="showAddModal || showEditModal || showFilterModal"></div>

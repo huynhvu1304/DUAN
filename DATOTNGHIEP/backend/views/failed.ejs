@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán thất bại</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #dc3545; /* Đổi màu chính thành đỏ */
+        --secondary-color: #6c757d;
+        --text-color: #333;
+        --light-text-color: #666;
+        --background-color: #f8f9fa;
+        --card-background: #ffffff;
+        --border-color: #e9ecef;
+        --fail-bg: #f8d7da; /* Màu nền cho lỗi */
+        --fail-color: #721c24; /* Màu chữ cho lỗi */
+        --blue-button-color: #007bff;
+        --blue-button-hover: #0056b3;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--background-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .fail-container {
+        background-color: var(--card-background);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 600px;
+        width: 100%;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .fail-container:hover {
+        transform: translateY(-5px);
+      }
+
+      .fail-icon {
+        color: var(--primary-color);
+        font-size: 80px;
+        margin-bottom: 20px;
+        animation: fadeInScale 0.8s;
+      }
+
+      @keyframes fadeInScale {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      h1 {
+        color: var(--text-color);
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      p {
+        color: var(--light-text-color);
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .info-section {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 25px;
+        background-color: #fdfdfd;
+      }
+
+      .info-section h2 {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 15px;
+        border-bottom: 2px solid var(--border-color);
+        padding-bottom: 10px;
+        text-align: left;
+      }
+
+      .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .info-row span:first-child {
+        font-weight: 500;
+        color: var(--secondary-color);
+      }
+
+      .info-row span:last-child {
+        color: var(--text-color);
+        font-weight: 500;
+      }
+
+      .btn-home {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+        background-color: var(--blue-button-color);
+        color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-home:hover {
+        background-color: var(--blue-button-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 600px) {
+        .fail-container {
+          padding: 25px;
+        }
+        h1 {
+          font-size: 26px;
+        }
+        .info-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .info-row span:last-child {
+          margin-top: 5px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fail-container">
+      <i class="bx bx-x-circle fail-icon"></i>
+      <h1>Thanh Toán Không Thành Công!</h1>
+      <p>
+        <%= message %> Vui lòng thử lại hoặc chọn phương thức thanh toán khác.
+      </p>
+      <div class="info-section">
+        <h2>Thông tin giao dịch</h2>
+        <div class="info-row">
+          <span>Mã đơn hàng:</span>
+          <span><%= orderId %></span>
+        </div>
+        <div class="info-row">
+          <span>Trạng thái đơn hàng:</span>
+          <span><%= orderStatus %></span>
+        </div>
+        <div class="info-row">
+          <span>Trạng thái thanh toán:</span>
+          <span><%= paymentStatus %></span>
+        </div>
+        <% if (vnp_TransactionNo) { %>
+        <div class="info-row">
+          <span>Mã giao dịch VNPAY:</span>
+          <span><%= vnp_TransactionNo %></span>
+        </div>
+        <% } %>
+      </div>
+      <a href="<%= clientUrl %>" class="btn-home">Quay về trang chủ</a>
+    </div>
+  </body>
+</html>
